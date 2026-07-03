@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dukaan Dreams 🪔 — Khushi's Bazaar Empire</title>
+<style>
+  :root{
+    --saffron:#FF9933;
+    --marigold:#FFB627;
+    --deep-pink:#E63E7C;
+    --teal:#0F8B8D;
+    --gold:#F5C518;
+    --cream:#FFF8EC;
+    --ink:#3A2618;
+    --panel:#FFFFFF;
+    --shadow:0 6px 18px rgba(58,38,24,0.15);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    background:
+      radial-gradient(circle at 10% 10%, #FFE1B0 0%, transparent 40%),
+      radial-gradient(circle at 90% 20%, #FFC1D9 0%, transparent 40%),
+      linear-gradient(160deg,#FFF3DA 0%,#FFE3C2 40%,#FFD3E4 100%);
+    color:var(--ink);
+    min-height:100vh;
+    padding-bottom:40px;
+  }
+  .topbar{
+    background:linear-gradient(120deg,var(--deep-pink),var(--saffron));
+    color:#fff;
+    padding:14px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    box-shadow:var(--shadow);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand h1{font-size:20px;margin:0;letter-spacing:0.5px;}
+  .brand small{display:block;font-weight:400;opacity:0.9;font-size:12px;}
+  .stats{display:flex;gap:14px;flex-wrap:wrap;}
+  .stat-pill{
+    background:rgba(255,255,255,0.22);
+    border-radius:999px;
+    padding:6px 14px;
+    font-weight:700;
+    font-size:14px;
+    display:flex;align-items:center;gap:6px;
+    backdrop-filter:blur(2px);
+  }
+  .container{max-width:1100px;margin:0 auto;padding:16px;}
+
+  .festival-banner{
+    background:linear-gradient(90deg,var(--gold),var(--marigold));
+    color:var(--ink);
+    border-radius:16px;
+    padding:12px 18px;
+    margin:14px 0;
+    box-shadow:var(--shadow);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
+    font-weight:600;
+    animation:glow 2s infinite alternate;
+  }
+  @keyframes glow{ from{filter:brightness(1);} to{filter:brightness(1.08);} }
+  .festival-banner button{
+    background:var(--deep-pink);color:#fff;border:none;padding:8px 16px;border-radius:999px;
+    font-weight:700;cursor:pointer;
+  }
+
+  .city-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-top:10px;}
+  .city-tab{
+    flex:0 0 auto;
+    background:var(--panel);
+    border:2px solid transparent;
+    border-radius:14px;
+    padding:10px 16px;
+    cursor:pointer;
+    font-weight:700;
+    box-shadow:var(--shadow);
+    white-space:nowrap;
+    opacity:0.9;
+  }
+  .city-tab.active{border-color:var(--deep-pink);background:linear-gradient(120deg,#fff,#FFE9D6);}
+  .city-tab.locked{opacity:0.5;cursor:not-allowed;}
+  .city-tab small{display:block;font-weight:400;font-size:11px;}
+
+  .street-card{
+    background:var(--panel);
+    border-radius:20px;
+    padding:18px;
+    margin-top:14px;
+    box-shadow:var(--shadow);
+  }
+  .street-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .street-title h2{margin:0;font-size:18px;}
+  .street-title p{margin:2px 0 0;font-size:13px;color:#7a5c47;}
+
+  .street-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+    gap:12px;
+    position:relative;
+    min-height:140px;
+    background:
+      repeating-linear-gradient(90deg, #F3D9AE 0 2px, transparent 2px 30px),
+      #FBEBD2;
+    border-radius:14px;
+    padding:14px;
+  }
+  .plot{
+    background:#fff;
+    border-radius:14px;
+    min-height:110px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    position:relative;
+    box-shadow:0 3px 8px rgba(0,0,0,0.08);
+    border:2px dashed #E7C79A;
+    transition:transform .12s;
+  }
+  .plot:hover{transform:translateY(-3px);}
+  .plot.filled{border:2px solid var(--gold);background:linear-gradient(160deg,#fff,#FFF3D6);}
+  .plot .emoji{font-size:34px;}
+  .plot .shop-name{font-size:11px;font-weight:700;text-align:center;margin-top:4px;padding:0 4px;}
+  .plot .tier-stars{font-size:11px;color:var(--marigold);}
+  .plot .add-icon{font-size:30px;color:#D9A868;font-weight:900;}
+  .plot .locked-lock{font-size:26px;opacity:.5;}
+
+  .customer-bubble{
+    position:absolute;
+    top:-14px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#fff;
+    border-radius:999px;
+    padding:2px 6px;
+    font-size:16px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    cursor:pointer;
+    animation:bob 1s infinite alternate;
+  }
+  @keyframes bob{from{transform:translateX(-50%) translateY(0);} to{transform:translateX(-50%) translateY(-4px);}}
+  .patience-bar{
+    position:absolute;
+    bottom:-10px;
+    left:10%;
+    width:80%;
+    height:5px;
+    background:#eee;
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .patience-fill{height:100%;background:var(--teal);}
+
+  .floating-coin{
+    position:absolute;
+    font-weight:800;
+    color:var(--deep-pink);
+    font-size:13px;
+    pointer-events:none;
+    animation:rise 0.9s forwards;
+  }
+  @keyframes rise{ from{opacity:1; transform:translateY(0);} to{opacity:0; transform:translateY(-40px);} }
+
+  .panel-row{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap;}
+  .panel{
+    background:var(--panel);
+    border-radius:18px;
+    padding:16px;
+    box-shadow:var(--shadow);
+    flex:1;
+    min-width:280px;
+  }
+  .panel h3{margin:0 0 10px;font-size:15px;display:flex;align-items:center;gap:6px;}
+  .shop-list-item, .deco-list-item{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:8px 6px;border-radius:10px;margin-bottom:4px;font-size:13px;
+  }
+  .shop-list-item:hover, .deco-list-item:hover{background:#FFF3E0;}
+  .buy-btn{
+    background:var(--teal);color:#fff;border:none;border-radius:999px;
+    padding:6px 12px;font-weight:700;cursor:pointer;font-size:12px;
+  }
+  .buy-btn:disabled{background:#ccc;cursor:not-allowed;}
+
+  .deco-strip{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+  .deco-chip{
+    background:#FFF3E0;border-radius:12px;padding:6px 10px;font-size:20px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.08);
+  }
+
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(58,38,24,0.5);
+    display:flex;align-items:center;justify-content:center;z-index:100;
+    padding:16px;
+  }
+  .modal{
+    background:#fff;border-radius:18px;padding:20px;max-width:380px;width:100%;
+    box-shadow:0 12px 30px rgba(0,0,0,0.3);
+  }
+  .modal h3{margin-top:0;}
+  .modal .close-x{float:right;cursor:pointer;font-weight:900;font-size:18px;}
+  .modal-btn{
+    width:100%;padding:10px;border:none;border-radius:12px;background:var(--deep-pink);
+    color:#fff;font-weight:700;cursor:pointer;margin-top:8px;font-size:14px;
+  }
+  .modal-btn.secondary{background:#eee;color:var(--ink);}
+  .modal-btn:disabled{background:#ddd;color:#999;cursor:not-allowed;}
+
+  .toast-wrap{position:fixed;bottom:16px;right:16px;display:flex;flex-direction:column;gap:8px;z-index:200;}
+  .toast{
+    background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;
+    font-size:13px;box-shadow:var(--shadow);animation:toastin .3s;
+    max-width:260px;
+  }
+  @keyframes toastin{from{opacity:0;transform:translateX(20px);} to{opacity:1;transform:translateX(0);}}
+
+  .footer-note{
+    text-align:center;font-size:12px;color:#8a6a52;margin-top:24px;
+  }
+  .note-btn{
+    background:none;border:1px solid #E7C79A;border-radius:999px;padding:6px 14px;
+    cursor:pointer;font-size:12px;color:var(--ink);margin-top:6px;
+  }
+  ::-webkit-scrollbar{height:6px;}
+  ::-webkit-scrollbar-thumb{background:#E7C79A;border-radius:4px;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <span style="font-size:28px;">🪔</span>
+    <div>
+      <h1>Dukaan Dreams</h1>
+      <small id="subtitle">Khushi's Bazaar Empire</small>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat-pill">💰 <span id="moneyStat">0</span></div>
+    <div class="stat-pill">⭐ <span id="repStat">0</span></div>
+    <div class="stat-pill">📅 Day <span id="dayStat">1</span></div>
+  </div>
+</div>
+
+<div class="container">
+  <div id="festivalBanner" style="display:none;" class="festival-banner"></div>
+
+  <div class="city-tabs" id="cityTabs"></div>
+
+  <div class="street-card">
+    <div class="street-title">
+      <div>
+        <h2 id="cityName">—</h2>
+        <p id="cityDesc"></p>
+      </div>
+      <div class="deco-strip" id="decoStrip"></div>
+    </div>
+    <div class="street-grid" id="streetGrid"></div>
+  </div>
+
+  <div class="panel-row">
+    <div class="panel">
+      <h3>🏪 Build a Shop</h3>
+      <div id="shopShopList"></div>
+    </div>
+    <div class="panel">
+      <h3>🎨 Decorations</h3>
+      <div id="decoShopList"></div>
+    </div>
+    <div class="panel">
+      <h3>🏆 Achievements</h3>
+      <div id="achList" style="font-size:13px;"></div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Built with love by Kunj for Khushi 💕
+    <br>
+    <button class="note-btn" id="noteBtn">💌 A little note</button>
+  </div>
+</div>
+
+<div id="modalRoot"></div>
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+/* ============================= DATA ============================= */
+const PLAYER_NAME = "Khushi";
+
+const SHOP_TYPES = {
+  chai:      {name:"Chai Tapri",        emoji:"☕", baseCost:40,  tiers:[{income:3,appeal:1,idle:0},{income:6,appeal:2,idle:1,upgradeCost:80},{income:12,appeal:3,idle:2,upgradeCost:200}]},
+  vadapav:   {name:"Vada Pav Cart",     emoji:"🥪", baseCost:70,  tiers:[{income:5,appeal:1,idle:0},{income:10,appeal:2,idle:2,upgradeCost:140},{income:20,appeal:4,idle:4,upgradeCost:320}]},
+  chaat:     {name:"Chaat Corner",      emoji:"🍛", baseCost:100, tiers:[{income:7,appeal:1,idle:0},{income:14,appeal:2,idle:2,upgradeCost:180},{income:28,appeal:4,idle:5,upgradeCost:380}]},
+  kulfi:     {name:"Kulfi Cart",        emoji:"🍨", baseCost:90,  tiers:[{income:6,appeal:1,idle:0},{income:12,appeal:2,idle:2,upgradeCost:160},{income:24,appeal:3,idle:4,upgradeCost:340}]},
+  mithai:    {name:"Mithai Shop",       emoji:"🍬", baseCost:220, tiers:[{income:15,appeal:2,idle:0},{income:30,appeal:4,idle:5,upgradeCost:400},{income:60,appeal:7,idle:10,upgradeCost:800}]},
+  saree:     {name:"Saree Boutique",    emoji:"🥻", baseCost:350, tiers:[{income:25,appeal:3,idle:0},{income:50,appeal:6,idle:8,upgradeCost:650},{income:100,appeal:10,idle:16,upgradeCost:1300}]},
+  jewel:     {name:"Johari Jewellery",  emoji:"💍", baseCost:600, tiers:[{income:45,appeal:5,idle:0},{income:90,appeal:9,idle:14,upgradeCost:1100},{income:180,appeal:15,idle:28,upgradeCost:2200}]},
+  spice:     {name:"Spice Stall",       emoji:"🌶️", baseCost:160, tiers:[{income:11,appeal:2,idle:0},{income:22,appeal:3,idle:3,upgradeCost:300},{income:44,appeal:5,idle:7,upgradeCost:600}]},
+  handicraft:{name:"Handicraft Shop",   emoji:"🏺", baseCost:300, tiers:[{income:20,appeal:2,idle:0},{income:40,appeal:4,idle:6,upgradeCost:550},{income:80,appeal:7,idle:12,upgradeCost:1100}]},
+  book:      {name:"Bookstall",         emoji:"📚", baseCost:150, tiers:[{income:10,appeal:1,idle:0},{income:20,appeal:2,idle:3,upgradeCost:280},{income:40,appeal:4,idle:6,upgradeCost:560}]},
+};
+
+const DECORATIONS = {
+  rangoli:  {name:"Rangoli Mat",        emoji:"🎨", cost:80,  appeal:2},
+  diya:     {name:"Diya String Lights", emoji:"🪔", cost:120, appeal:3},
+  bench:    {name:"Street Bench",       emoji:"🪑", cost:60,  appeal:1},
+  tulsi:    {name:"Tulsi Plant",        emoji:"🌿", cost:50,  appeal:1},
+  lamp:     {name:"Street Lamp",        emoji:"🏮", cost:90,  appeal:2},
+  rickshaw: {name:"Auto Rickshaw Prop", emoji:"🛺", cost:200, appeal:4},
+};
+
+const CITIES = [
+  {id:"mumbai",  name:"Mumbai Chowpatty Lane", desc:"Where every dream in the bazaar business begins.", unlockRep:0,    plots:6, shops:["chai","vadapav","chaat","kulfi"]},
+  {id:"delhi",   name:"Delhi Chandni Chowk",   desc:"Glittering lanes of silk and spice.",              unlockRep:600,  plots:7, shops:["saree","jewel","mithai","spice","chai"]},
+  {id:"jaipur",  name:"Jaipur Johari Bazaar",  desc:"The Pink City's jewel of jewel-markets.",           unlockRep:1500, plots:7, shops:["jewel","handicraft","saree","chai"]},
+  {id:"kolkata", name:"Kolkata College Street",desc:"Books, sweets, and adda over cutting chai.",        unlockRep:2800, plots:7, shops:["book","mithai","chai","chaat"]},
+  {id:"kochi",   name:"Kochi Spice Market",    desc:"The scent of cardamom drifts down the backwaters.", unlockRep:4500, plots:8, shops:["spice","handicraft","kulfi","vadapav"]},
+  {id:"goa",     name:"Goa Night Market",      desc:"The grand finale — every stall, every flavour.",    unlockRep:7000, plots:9, shops:Object.keys(SHOP_TYPES)},
+];
+
+const FESTIVALS = [
+  {id:"diwali",  name:"Diwali Dhamaka",  emoji:"🪔", boost:["mithai","jewel"],   mult:2,   durationDays:3, minDay:5,  cooldown:12},
+  {id:"holi",    name:"Holi Rang Utsav", emoji:"🎨", boost:["kulfi","chaat"],    mult:2,   durationDays:2, minDay:10, cooldown:12},
+  {id:"wedding", name:"Wedding Season",  emoji:"💍", boost:["saree","jewel"],    mult:1.8, durationDays:4, minDay:15, cooldown:14},
+];
+
+const ACHIEVEMENTS = [
+  {id:"first_shop", label:"First Dukaan!", test:s=>Object.values(s.cities).some(c=>c.shops.some(p=>p)) },
+  {id:"rich_1000",  label:"₹1,000 earned lifetime", test:s=>s.lifetimeEarned>=1000 },
+  {id:"rich_10000", label:"₹10,000 earned lifetime", test:s=>s.lifetimeEarned>=10000 },
+  {id:"rep_1000",   label:"1,000 reputation", test:s=>s.reputation>=1000 },
+  {id:"festival_1", label:"First festival hosted", test:s=>s.festivalsHosted>=1 },
+  {id:"all_cities",  label:"Unlocked every city!", test:s=>CITIES.every(c=>s.reputation>=c.unlockRep) },
+];
+
+/* ============================= STORAGE ============================= */
+const SAVE_KEY = "dukaan_dreams_save_v1";
+const MemStore = {};
+function storageSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){ MemStore[k]=v; } }
+function storageGet(k){ try{ return localStorage.getItem(k); }catch(e){ return MemStore[k]||null; } }
+
+/* ============================= STATE ============================= */
+function freshState(){
+  const cities = {};
+  CITIES.forEach(c=>{
+    cities[c.id] = { shops:new Array(c.plots).fill(null), decos:[] };
+  });
+  return {
+    money:150,
+    reputation:0,
+    day:1,
+    lifetimeEarned:0,
+    festivalsHosted:0,
+    currentCity:"mumbai",
+    activeFestival:null, // {id, endsDay}
+    festivalCooldowns:{},
+    unlockedAch:[],
+    cities
+  };
+}
+
+let state = loadState();
+function loadState(){
+  const raw = storageGet(SAVE_KEY);
+  if(!raw) return freshState();
+  try{
+    const parsed = JSON.parse(raw);
+    // merge in case new cities/shops were added since save
+    const fresh = freshState();
+    CITIES.forEach(c=>{
+      if(!parsed.cities[c.id]) parsed.cities[c.id] = fresh.cities[c.id];
+      if(parsed.cities[c.id].shops.length < c.plots){
+        while(parsed.cities[c.id].shops.length < c.plots) parsed.cities[c.id].shops.push(null);
+      }
+    });
+    return Object.assign(fresh, parsed);
+  }catch(e){ return freshState(); }
+}
+function saveState(){ storageSet(SAVE_KEY, JSON.stringify(state)); }
+
+let customers = []; // {plotIndex, shopId, patience, maxPatience, id}
+let custIdSeq = 1;
+
+/* ============================= HELPERS ============================= */
+function cityDef(id){ return CITIES.find(c=>c.id===id); }
+function currentCityDef(){ return cityDef(state.currentCity); }
+function currentCityState(){ return state.cities[state.currentCity]; }
+function fmt(n){ return Math.round(n).toLocaleString('en-IN'); }
+
+function isFestivalActiveFor(shopId){
+  if(!state.activeFestival) return null;
+  const fest = FESTIVALS.find(f=>f.id===state.activeFestival.id);
+  if(fest && fest.boost.includes(shopId)) return fest;
+  return null;
+}
+
+function totalAppeal(cityId){
+  const cs = state.cities[cityId];
+  let total = 0;
+  cs.shops.forEach(p=>{ if(p){ total += SHOP_TYPES[p.shopId].tiers[p.tier].appeal; } });
+  cs.decos.forEach(d=>{ total += DECORATIONS[d].appeal; });
+  return total;
+}
+
+function toast(msg){
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  wrap.appendChild(el);
+  setTimeout(()=>el.remove(), 3500);
+}
+
+function checkAchievements(){
+  ACHIEVEMENTS.forEach(a=>{
+    if(!state.unlockedAch.includes(a.id) && a.test(state)){
+      state.unlockedAch.push(a.id);
+      toast("🏆 Achievement: "+a.label);
+    }
+  });
+}
+
+/* ============================= RENDER ============================= */
+function render(){
+  document.getElementById('subtitle').textContent = PLAYER_NAME + "'s Bazaar Empire";
+  document.getElementById('moneyStat').textContent = "₹"+fmt(state.money);
+  document.getElementById('repStat').textContent = fmt(state.reputation);
+  document.getElementById('dayStat').textContent = state.day;
+
+  renderFestivalBanner();
+  renderCityTabs();
+  renderStreet();
+  renderShopList();
+  renderDecoList();
+  renderAchievements();
+}
+
+function renderFestivalBanner(){
+  const el = document.getElementById('festivalBanner');
+  if(state.activeFestival){
+    const fest = FESTIVALS.find(f=>f.id===state.activeFestival.id);
+    el.style.display='flex';
+    el.innerHTML = `<span>${fest.emoji} <b>${fest.name}</b> is live! ${fest.mult}x income on ${fest.boost.map(s=>SHOP_TYPES[s].name).join(' & ')} — ends Day ${state.activeFestival.endsDay}.</span>`;
+  } else {
+    const next = FESTIVALS.find(f=> state.day >= f.minDay && (!state.festivalCooldowns[f.id] || state.day >= state.festivalCooldowns[f.id]) );
+    if(next){
+      el.style.display='flex';
+      el.innerHTML = `<span>${next.emoji} <b>${next.name}</b> is ready to begin!</span><button onclick="startFestival('${next.id}')">Start Festival</button>`;
+    } else {
+      el.style.display='none';
+    }
+  }
+}
+
+function renderCityTabs(){
+  const wrap = document.getElementById('cityTabs');
+  wrap.innerHTML = '';
+  CITIES.forEach(c=>{
+    const unlocked = state.reputation >= c.unlockRep;
+    const div = document.createElement('div');
+    div.className = 'city-tab' + (c.id===state.currentCity?' active':'') + (!unlocked?' locked':'');
+    div.innerHTML = `${c.name}<small>${unlocked? (c.plots+' plots') : ('🔒 needs ⭐'+fmt(c.unlockRep))}</small>`;
+    if(unlocked){ div.onclick = ()=>{ state.currentCity=c.id; customers=[]; render(); }; }
+    wrap.appendChild(div);
+  });
+}
+
+function renderStreet(){
+  const cdef = currentCityDef();
+  const cs = currentCityState();
+  document.getElementById('cityName').textContent = cdef.name;
+  document.getElementById('cityDesc').textContent = cdef.desc;
+
+  const decoStrip = document.getElementById('decoStrip');
+  decoStrip.innerHTML = cs.decos.map(d=>`<span class="deco-chip" title="${DECORATIONS[d].name}">${DECORATIONS[d].emoji}</span>`).join('');
+
+  const grid = document.getElementById('streetGrid');
+  grid.innerHTML = '';
+  cs.shops.forEach((placed, idx)=>{
+    const plot = document.createElement('div');
+    plot.className = 'plot' + (placed?' filled':'');
+    plot.dataset.idx = idx;
+    if(placed){
+      const type = SHOP_TYPES[placed.shopId];
+      const tierInfo = type.tiers[placed.tier];
+      plot.innerHTML = `<div class="emoji">${type.emoji}</div>
+        <div class="shop-name">${type.name}</div>
+        <div class="tier-stars">${'★'.repeat(placed.tier+1)}${'☆'.repeat(2-placed.tier)}</div>`;
+      plot.onclick = ()=>openShopModal(idx);
+    } else {
+      plot.innerHTML = `<div class="add-icon">+</div><div class="shop-name">Build here</div>`;
+      plot.onclick = ()=>openBuildModal(idx);
+    }
+    // customer bubble
+    const c = customers.find(c=>c.plotIndex===idx && c.cityId===state.currentCity);
+    if(c){
+      const bubble = document.createElement('div');
+      bubble.className = 'customer-bubble';
+      bubble.textContent = '🙋 ' + SHOP_TYPES[c.shopId].emoji;
+      bubble.onclick = (e)=>{ e.stopPropagation(); serveCustomer(c.id); };
+      plot.appendChild(bubble);
+
+      const pbar = document.createElement('div');
+      pbar.className = 'patience-bar';
+      const pfill = document.createElement('div');
+      pfill.className = 'patience-fill';
+      pfill.style.width = Math.max(0,(c.patience/c.maxPatience*100))+'%';
+      pbar.appendChild(pfill);
+      plot.appendChild(pbar);
+    }
+    grid.appendChild(plot);
+  });
+}
+
+function renderShopList(){
+  const cdef = currentCityDef();
+  const wrap = document.getElementById('shopShopList');
+  wrap.innerHTML = '';
+  cdef.shops.forEach(shopId=>{
+    const type = SHOP_TYPES[shopId];
+    const row = document.createElement('div');
+    row.className = 'shop-list-item';
+    row.innerHTML = `<span>${type.emoji} ${type.name} <br><small>₹${fmt(type.baseCost)} · appeal ${type.tiers[0].appeal}</small></span>`;
+    const btn = document.createElement('button');
+    btn.className='buy-btn';
+    btn.textContent='Build';
+    btn.disabled = state.money < type.baseCost || !currentCityState().shops.includes(null);
+    btn.onclick = ()=>{
+      const emptyIdx = currentCityState().shops.findIndex(p=>p===null);
+      if(emptyIdx===-1){ toast("No empty plots left here!"); return; }
+      buildShop(emptyIdx, shopId);
+    };
+    row.appendChild(btn);
+    wrap.appendChild(row);
+  });
+}
+
+function renderDecoList(){
+  const wrap = document.getElementById('decoShopList');
+  wrap.innerHTML = '';
+  Object.entries(DECORATIONS).forEach(([id,d])=>{
+    const row = document.createElement('div');
+    row.className = 'deco-list-item';
+    row.innerHTML = `<span>${d.emoji} ${d.name} <br><small>₹${fmt(d.cost)} · +${d.appeal} appeal</small></span>`;
+    const btn = document.createElement('button');
+    btn.className='buy-btn';
+    btn.textContent='Place';
+    btn.disabled = state.money < d.cost;
+    btn.onclick = ()=>{
+      if(state.money < d.cost) return;
+      state.money -= d.cost;
+      currentCityState().decos.push(id);
+      toast(`Placed ${d.name}! +${d.appeal} appeal`);
+      checkAchievements();
+      saveState(); render();
+    };
+    row.appendChild(btn);
+    wrap.appendChild(row);
+  });
+}
+
+function renderAchievements(){
+  const wrap = document.getElementById('achList');
+  wrap.innerHTML = ACHIEVEMENTS.map(a=>{
+    const got = state.unlockedAch.includes(a.id);
+    return `<div style="opacity:${got?1:0.4};padding:4px 0;">${got?'✅':'⬜'} ${a.label}</div>`;
+  }).join('');
+}
+
+/* ============================= ACTIONS ============================= */
+function buildShop(idx, shopId){
+  const type = SHOP_TYPES[shopId];
+  if(state.money < type.baseCost) return;
+  state.money -= type.baseCost;
+  currentCityState().shops[idx] = {shopId, tier:0};
+  toast(`Opened a new ${type.name}! ${type.emoji}`);
+  checkAchievements();
+  saveState(); render();
+}
+
+function openBuildModal(idx){
+  const cdef = currentCityDef();
+  const options = cdef.shops.map(shopId=>{
+    const t = SHOP_TYPES[shopId];
+    const affordable = state.money >= t.baseCost;
+    return `<button class="modal-btn ${affordable?'':'secondary'}" ${affordable?'':'disabled'} onclick="buildShop(${idx},'${shopId}');closeModal();">
+      ${t.emoji} ${t.name} — ₹${fmt(t.baseCost)}
+    </button>`;
+  }).join('');
+  showModal(`<h3><span class="close-x" onclick="closeModal()">✕</span>Build a Shop</h3>
+    <p style="font-size:13px;color:#7a5c47;">Choose what to open on this plot:</p>
+    ${options}`);
+}
+
+function openShopModal(idx){
+  const placed = currentCityState().shops[idx];
+  const type = SHOP_TYPES[placed.shopId];
+  const tierInfo = type.tiers[placed.tier];
+  const nextTier = type.tiers[placed.tier+1];
+  let html = `<h3><span class="close-x" onclick="closeModal()">✕</span>${type.emoji} ${type.name}</h3>
+    <p style="font-size:13px;">Tier ${placed.tier+1} of 3 · Serve income ₹${tierInfo.income} · Appeal ${tierInfo.appeal}${tierInfo.idle?(' · Idle +₹'+tierInfo.idle+'/tick'):''}</p>`;
+  if(nextTier){
+    html += `<button class="modal-btn" ${state.money<nextTier.upgradeCost?'disabled':''} onclick="upgradeShop(${idx});closeModal();">⬆️ Upgrade — ₹${fmt(nextTier.upgradeCost)}</button>`;
+  } else {
+    html += `<p style="font-size:12px;color:#7a5c47;">🌟 Maxed out! This shop is at its best.</p>`;
+  }
+  html += `<button class="modal-btn secondary" onclick="sellShop(${idx});closeModal();">Sell shop (refund 50%)</button>`;
+  showModal(html);
+}
+
+function upgradeShop(idx){
+  const placed = currentCityState().shops[idx];
+  const type = SHOP_TYPES[placed.shopId];
+  const nextTier = type.tiers[placed.tier+1];
+  if(!nextTier || state.money < nextTier.upgradeCost) return;
+  state.money -= nextTier.upgradeCost;
+  placed.tier += 1;
+  toast(`${type.name} upgraded to tier ${placed.tier+1}! ⭐`);
+  checkAchievements();
+  saveState(); render();
+}
+
+function sellShop(idx){
+  const placed = currentCityState().shops[idx];
+  const type = SHOP_TYPES[placed.shopId];
+  let refund = type.baseCost*0.5;
+  for(let i=1;i<=placed.tier;i++) refund += type.tiers[i].upgradeCost*0.5;
+  state.money += refund;
+  currentCityState().shops[idx] = null;
+  toast(`Sold ${type.name} for ₹${fmt(refund)}`);
+  saveState(); render();
+}
+
+function serveCustomer(custId){
+  const idx = customers.findIndex(c=>c.id===custId);
+  if(idx===-1) return;
+  const c = customers[idx];
+  const placed = currentCityState().shops[c.plotIndex];
+  if(!placed) { customers.splice(idx,1); render(); return; }
+  const type = SHOP_TYPES[placed.shopId];
+  const tierInfo = type.tiers[placed.tier];
+  const fest = isFestivalActiveFor(placed.shopId);
+  const mult = fest ? fest.mult : 1;
+  const earn = Math.round(tierInfo.income * mult);
+  const rep = Math.round(tierInfo.income/4) + tierInfo.appeal;
+  state.money += earn;
+  state.lifetimeEarned += earn;
+  state.reputation += rep;
+  customers.splice(idx,1);
+  checkAchievements();
+  saveState(); render();
+}
+
+function startFestival(festId){
+  const fest = FESTIVALS.find(f=>f.id===festId);
+  state.activeFestival = {id:festId, endsDay: state.day + fest.durationDays};
+  state.festivalsHosted += 1;
+  toast(`${fest.emoji} ${fest.name} has begun!`);
+  checkAchievements();
+  saveState(); render();
+}
+
+/* ============================= MODAL ============================= */
+function showModal(innerHtml){
+  const root = document.getElementById('modalRoot');
+  root.innerHTML = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">${innerHtml}</div></div>`;
+}
+function closeModal(){ document.getElementById('modalRoot').innerHTML=''; }
+
+/* ============================= GAME LOOP ============================= */
+function gameTick(){
+  // idle income across ALL cities (not just current, but reduced rate if not current for balance? keep simple: only current city idles for clarity)
+  const cs = currentCityState();
+  let idleGain = 0;
+  cs.shops.forEach(p=>{
+    if(p){
+      const tierInfo = SHOP_TYPES[p.shopId].tiers[p.tier];
+      if(tierInfo.idle){
+        const fest = isFestivalActiveFor(p.shopId);
+        idleGain += tierInfo.idle * (fest?fest.mult:1);
+      }
+    }
+  });
+  if(idleGain>0){
+    state.money += idleGain;
+    state.lifetimeEarned += idleGain;
+  }
+
+  // spawn customers
+  const appeal = totalAppeal(state.currentCity);
+  const builtIdxs = cs.shops.map((p,i)=>p?i:null).filter(i=>i!==null);
+  const activeInCity = customers.filter(c=>c.cityId===state.currentCity).length;
+  const spawnChance = Math.min(0.55, 0.06*builtIdxs.length + 0.015*appeal);
+  if(builtIdxs.length>0 && activeInCity < 6 && Math.random() < spawnChance){
+    // pick a plot without an existing customer
+    const free = builtIdxs.filter(i=> !customers.some(c=>c.plotIndex===i && c.cityId===state.currentCity));
+    if(free.length>0){
+      const idx = free[Math.floor(Math.random()*free.length)];
+      const shopId = cs.shops[idx].shopId;
+      customers.push({id:custIdSeq++, cityId:state.currentCity, plotIndex:idx, shopId, patience:100, maxPatience:100});
+    }
+  }
+
+  // decay patience
+  customers = customers.filter(c=>{
+    if(c.cityId!==state.currentCity) return true;
+    c.patience -= 9;
+    if(c.patience<=0){
+      state.reputation = Math.max(0, state.reputation-2);
+      return false;
+    }
+    return true;
+  });
+
+  // festival end check
+  if(state.activeFestival && state.day >= state.activeFestival.endsDay){
+    const fest = FESTIVALS.find(f=>f.id===state.activeFestival.id);
+    state.festivalCooldowns[fest.id] = state.day + fest.cooldown;
+    toast(`${fest.emoji} ${fest.name} has ended. Thanks for celebrating!`);
+    state.activeFestival = null;
+  }
+
+  saveState();
+  render();
+}
+
+function dayTick(){
+  state.day += 1;
+  saveState();
+  render();
+}
+
+/* ============================= NOTE ============================= */
+document.getElementById('noteBtn').onclick = ()=>{
+  showModal(`<h3><span class="close-x" onclick="closeModal()">✕</span>💌 For Khushi</h3>
+  <p style="font-size:14px;line-height:1.6;">
+  I built this whole bazaar just for you — every chai stall, every diya, every little jingle of coins.
+  Grow it, decorate it, take it through every festival. Hope it makes you smile as much as you make me smile. 🌸
+  </p>
+  <button class="modal-btn" onclick="closeModal()">🥰</button>`);
+};
+
+/* ============================= INIT ============================= */
+render();
+setInterval(gameTick, 1500);
+setInterval(dayTick, 45000);
+</script>
+</body>
+</html>
