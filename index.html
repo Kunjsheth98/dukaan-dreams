@@ -15,6 +15,8 @@
     --ink:#3A2618;
     --panel:#FFFFFF;
     --shadow:0 6px 18px rgba(58,38,24,0.15);
+    --danger:#D64545;
+    --ok:#2E9E5B;
   }
   *{box-sizing:border-box;}
   body{
@@ -31,7 +33,7 @@
   .topbar{
     background:linear-gradient(120deg,var(--deep-pink),var(--saffron));
     color:#fff;
-    padding:14px 20px;
+    padding:12px 20px;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -43,38 +45,44 @@
     z-index:50;
   }
   .brand{display:flex;align-items:center;gap:10px;}
-  .brand h1{font-size:20px;margin:0;letter-spacing:0.5px;}
-  .brand small{display:block;font-weight:400;opacity:0.9;font-size:12px;}
-  .stats{display:flex;gap:14px;flex-wrap:wrap;}
+  .brand h1{font-size:19px;margin:0;letter-spacing:0.5px;}
+  .brand small{display:block;font-weight:400;opacity:0.9;font-size:11px;}
+  .stats{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
   .stat-pill{
     background:rgba(255,255,255,0.22);
     border-radius:999px;
-    padding:6px 14px;
+    padding:6px 12px;
     font-weight:700;
-    font-size:14px;
+    font-size:13px;
     display:flex;align-items:center;gap:6px;
-    backdrop-filter:blur(2px);
   }
-  .container{max-width:1100px;margin:0 auto;padding:16px;}
+  .goal-wrap{display:flex;flex-direction:column;align-items:flex-start;min-width:130px;}
+  .goal-track{width:130px;height:9px;background:rgba(255,255,255,0.35);border-radius:6px;overflow:hidden;margin-top:2px;}
+  .goal-fill{height:100%;background:var(--gold);transition:width .3s;}
+  .goal-label{font-size:10px;opacity:0.9;}
+  .icon-btn{
+    background:rgba(255,255,255,0.25);border:none;color:#fff;border-radius:10px;
+    padding:6px 10px;font-weight:700;cursor:pointer;font-size:13px;
+  }
+
+  .container{max-width:1150px;margin:0 auto;padding:16px;}
 
   .festival-banner{
     background:linear-gradient(90deg,var(--gold),var(--marigold));
     color:var(--ink);
     border-radius:16px;
-    padding:12px 18px;
+    padding:10px 18px;
     margin:14px 0;
     box-shadow:var(--shadow);
     display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
-    font-weight:600;
-    animation:glow 2s infinite alternate;
+    font-weight:600;font-size:13px;
   }
-  @keyframes glow{ from{filter:brightness(1);} to{filter:brightness(1.08);} }
   .festival-banner button{
     background:var(--deep-pink);color:#fff;border:none;padding:8px 16px;border-radius:999px;
     font-weight:700;cursor:pointer;
   }
 
-  .city-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-top:10px;}
+  .city-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-top:6px;}
   .city-tab{
     flex:0 0 auto;
     background:var(--panel);
@@ -86,10 +94,11 @@
     box-shadow:var(--shadow);
     white-space:nowrap;
     opacity:0.9;
+    font-size:13px;
   }
   .city-tab.active{border-color:var(--deep-pink);background:linear-gradient(120deg,#fff,#FFE9D6);}
   .city-tab.locked{opacity:0.5;cursor:not-allowed;}
-  .city-tab small{display:block;font-weight:400;font-size:11px;}
+  .city-tab small{display:block;font-weight:400;font-size:10px;}
 
   .street-card{
     background:var(--panel);
@@ -98,79 +107,67 @@
     margin-top:14px;
     box-shadow:var(--shadow);
   }
-  .street-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .street-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;}
   .street-title h2{margin:0;font-size:18px;}
-  .street-title p{margin:2px 0 0;font-size:13px;color:#7a5c47;}
+  .street-title p{margin:2px 0 0;font-size:12px;color:#7a5c47;}
+  .day-controls{display:flex;gap:8px;align-items:center;}
+  .day-controls button{
+    border:none;border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:12px;
+  }
+  .btn-pause{background:#eee;color:var(--ink);}
+  .btn-nextday{background:var(--teal);color:#fff;}
 
-  .street-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
-    gap:12px;
+  /* THE STREET */
+  .street-scene{
     position:relative;
-    min-height:140px;
-    background:
-      repeating-linear-gradient(90deg, #F3D9AE 0 2px, transparent 2px 30px),
-      #FBEBD2;
-    border-radius:14px;
-    padding:14px;
-  }
-  .plot{
-    background:#fff;
-    border-radius:14px;
-    min-height:110px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    position:relative;
-    box-shadow:0 3px 8px rgba(0,0,0,0.08);
-    border:2px dashed #E7C79A;
-    transition:transform .12s;
-  }
-  .plot:hover{transform:translateY(-3px);}
-  .plot.filled{border:2px solid var(--gold);background:linear-gradient(160deg,#fff,#FFF3D6);}
-  .plot .emoji{font-size:34px;}
-  .plot .shop-name{font-size:11px;font-weight:700;text-align:center;margin-top:4px;padding:0 4px;}
-  .plot .tier-stars{font-size:11px;color:var(--marigold);}
-  .plot .add-icon{font-size:30px;color:#D9A868;font-weight:900;}
-  .plot .locked-lock{font-size:26px;opacity:.5;}
-
-  .customer-bubble{
-    position:absolute;
-    top:-14px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#fff;
-    border-radius:999px;
-    padding:2px 6px;
-    font-size:16px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.25);
-    cursor:pointer;
-    animation:bob 1s infinite alternate;
-  }
-  @keyframes bob{from{transform:translateX(-50%) translateY(0);} to{transform:translateX(-50%) translateY(-4px);}}
-  .patience-bar{
-    position:absolute;
-    bottom:-10px;
-    left:10%;
-    width:80%;
-    height:5px;
-    background:#eee;
-    border-radius:4px;
+    border-radius:16px;
     overflow:hidden;
+    background:linear-gradient(180deg,#BEE7F5 0%,#BEE7F5 45%,#F3D9AE 45%,#F3D9AE 78%,#8C8C94 78%,#8C8C94 100%);
+    height:230px;
   }
-  .patience-fill{height:100%;background:var(--teal);}
-
-  .floating-coin{
+  .cloud{position:absolute;top:12px;font-size:26px;opacity:0.85;animation:drift 40s linear infinite;}
+  @keyframes drift{ from{left:-10%;} to{left:110%;} }
+  .shops-row{
     position:absolute;
-    font-weight:800;
-    color:var(--deep-pink);
-    font-size:13px;
-    pointer-events:none;
-    animation:rise 0.9s forwards;
+    top:46%;
+    left:0;
+    height:80px;
+    display:flex;
+    gap:14px;
+    padding-left:14px;
+    align-items:flex-end;
   }
-  @keyframes rise{ from{opacity:1; transform:translateY(0);} to{opacity:0; transform:translateY(-40px);} }
+  .shop-slot{
+    width:150px;height:80px;
+    background:#fff;
+    border-radius:10px 10px 4px 4px;
+    border:2px dashed #E7C79A;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    cursor:pointer;position:relative;flex:0 0 auto;
+    box-shadow:0 3px 8px rgba(0,0,0,0.12);
+  }
+  .shop-slot.filled{border:2px solid var(--gold);background:linear-gradient(160deg,#fff,#FFF3D6);}
+  .shop-slot .emoji{font-size:28px;}
+  .shop-slot .shop-name{font-size:10px;font-weight:700;text-align:center;padding:0 4px;}
+  .shop-slot .tier-stars{font-size:10px;color:var(--marigold);}
+  .shop-slot .add-icon{font-size:24px;color:#D9A868;font-weight:900;}
+  .cap-bar{
+    position:absolute;top:-16px;left:8px;right:8px;height:7px;background:#f3cccc;border-radius:5px;overflow:hidden;
+  }
+  .cap-fill{height:100%;background:var(--danger);transition:width .2s;}
+  .cap-label{position:absolute;top:-30px;left:0;right:0;text-align:center;font-size:9px;font-weight:800;color:var(--danger);}
+
+  .sidewalk-actors{position:absolute;left:0;right:0;top:46%;height:80px;pointer-events:none;}
+  .customer{
+    position:absolute;
+    bottom:6px;
+    font-size:22px;
+    transition:left 0.1s linear;
+    filter:drop-shadow(0 2px 2px rgba(0,0,0,0.25));
+  }
+  .road{position:absolute;bottom:0;left:0;right:0;height:22%;}
+  .car{position:absolute;bottom:6px;font-size:20px;animation:carmove 7s linear infinite;}
+  @keyframes carmove{ from{left:-8%;} to{left:108%;} }
 
   .panel-row{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap;}
   .panel{
@@ -179,12 +176,13 @@
     padding:16px;
     box-shadow:var(--shadow);
     flex:1;
-    min-width:280px;
+    min-width:270px;
   }
-  .panel h3{margin:0 0 10px;font-size:15px;display:flex;align-items:center;gap:6px;}
+  .panel h3{margin:0 0 6px;font-size:15px;display:flex;align-items:center;gap:6px;}
+  .panel .hint{font-size:11px;color:#8a6a52;margin-bottom:8px;}
   .shop-list-item, .deco-list-item{
     display:flex;justify-content:space-between;align-items:center;
-    padding:8px 6px;border-radius:10px;margin-bottom:4px;font-size:13px;
+    padding:8px 6px;border-radius:10px;margin-bottom:4px;font-size:12.5px;
   }
   .shop-list-item:hover, .deco-list-item:hover{background:#FFF3E0;}
   .buy-btn{
@@ -193,9 +191,9 @@
   }
   .buy-btn:disabled{background:#ccc;cursor:not-allowed;}
 
-  .deco-strip{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+  .deco-owned-strip{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
   .deco-chip{
-    background:#FFF3E0;border-radius:12px;padding:6px 10px;font-size:20px;
+    background:#FFF3E0;border-radius:10px;padding:4px 8px;font-size:15px;
     box-shadow:0 2px 5px rgba(0,0,0,0.08);
   }
 
@@ -216,6 +214,7 @@
   }
   .modal-btn.secondary{background:#eee;color:var(--ink);}
   .modal-btn:disabled{background:#ddd;color:#999;cursor:not-allowed;}
+  .stat-line{font-size:12.5px;color:#5a4636;margin:3px 0;}
 
   .toast-wrap{position:fixed;bottom:16px;right:16px;display:flex;flex-direction:column;gap:8px;z-index:200;}
   .toast{
@@ -225,9 +224,7 @@
   }
   @keyframes toastin{from{opacity:0;transform:translateX(20px);} to{opacity:1;transform:translateX(0);}}
 
-  .footer-note{
-    text-align:center;font-size:12px;color:#8a6a52;margin-top:24px;
-  }
+  .footer-note{text-align:center;font-size:12px;color:#8a6a52;margin-top:24px;}
   .note-btn{
     background:none;border:1px solid #E7C79A;border-radius:999px;padding:6px 14px;
     cursor:pointer;font-size:12px;color:var(--ink);margin-top:6px;
@@ -240,7 +237,7 @@
 
 <div class="topbar">
   <div class="brand">
-    <span style="font-size:28px;">🪔</span>
+    <span style="font-size:26px;">🪔</span>
     <div>
       <h1>Dukaan Dreams</h1>
       <small id="subtitle">Khushi's Bazaar Empire</small>
@@ -248,8 +245,12 @@
   </div>
   <div class="stats">
     <div class="stat-pill">💰 <span id="moneyStat">0</span></div>
+    <div class="goal-wrap">
+      <span class="goal-label">Day <span id="dayStat">1</span> Goal: ₹<span id="goalStat">0</span></span>
+      <div class="goal-track"><div class="goal-fill" id="goalFill" style="width:0%;"></div></div>
+    </div>
     <div class="stat-pill">⭐ <span id="repStat">0</span></div>
-    <div class="stat-pill">📅 Day <span id="dayStat">1</span></div>
+    <div class="stat-pill">⏱️ <span id="timerStat">40</span>s</div>
   </div>
 </div>
 
@@ -264,18 +265,35 @@
         <h2 id="cityName">—</h2>
         <p id="cityDesc"></p>
       </div>
-      <div class="deco-strip" id="decoStrip"></div>
+      <div class="day-controls">
+        <button class="btn-pause" id="pauseBtn">⏸ Pause</button>
+        <button class="btn-nextday" id="nextDayBtn">Next Day ▶</button>
+      </div>
     </div>
-    <div class="street-grid" id="streetGrid"></div>
+
+    <div class="street-scene" id="streetScene">
+      <span class="cloud" style="left:10%; top:10px;">☁️</span>
+      <span class="cloud" style="left:55%; top:26px; animation-delay:-12s;">☁️</span>
+      <div class="shops-row" id="shopsRow"></div>
+      <div class="sidewalk-actors" id="sidewalkActors"></div>
+      <div class="road" id="road">
+        <span class="car" style="animation-delay:0s;">🚗</span>
+        <span class="car" style="animation-delay:-4s;">🛺</span>
+      </div>
+    </div>
+
+    <div class="deco-owned-strip" id="decoOwnedStrip"></div>
   </div>
 
   <div class="panel-row">
     <div class="panel">
       <h3>🏪 Build a Shop</h3>
+      <p class="hint">Order matters! Fast & cheap shops early catch more customers before their money runs out.</p>
       <div id="shopShopList"></div>
     </div>
     <div class="panel">
-      <h3>🎨 Decorations</h3>
+      <h3>🎨 Street Boosters</h3>
+      <p class="hint">These change customer flow, not just looks.</p>
       <div id="decoShopList"></div>
     </div>
     <div class="panel">
@@ -295,38 +313,45 @@
 <div class="toast-wrap" id="toastWrap"></div>
 
 <script>
-/* ============================= DATA ============================= */
+/* ============================= CONFIG ============================= */
 const PLAYER_NAME = "Khushi";
+const STEP = 164;        // px per street slot (shop width + gap)
+const SPAWN_BASE_MS = 1700;
+const DAY_DURATION_S = 40;
+const TICK_MS = 100;
 
+/* ============================= DATA ============================= */
+// tiers: capacity, dwell (seconds a customer stays), price (rupees charged per visit)
 const SHOP_TYPES = {
-  chai:      {name:"Chai Tapri",        emoji:"☕", baseCost:40,  tiers:[{income:3,appeal:1,idle:0},{income:6,appeal:2,idle:1,upgradeCost:80},{income:12,appeal:3,idle:2,upgradeCost:200}]},
-  vadapav:   {name:"Vada Pav Cart",     emoji:"🥪", baseCost:70,  tiers:[{income:5,appeal:1,idle:0},{income:10,appeal:2,idle:2,upgradeCost:140},{income:20,appeal:4,idle:4,upgradeCost:320}]},
-  chaat:     {name:"Chaat Corner",      emoji:"🍛", baseCost:100, tiers:[{income:7,appeal:1,idle:0},{income:14,appeal:2,idle:2,upgradeCost:180},{income:28,appeal:4,idle:5,upgradeCost:380}]},
-  kulfi:     {name:"Kulfi Cart",        emoji:"🍨", baseCost:90,  tiers:[{income:6,appeal:1,idle:0},{income:12,appeal:2,idle:2,upgradeCost:160},{income:24,appeal:3,idle:4,upgradeCost:340}]},
-  mithai:    {name:"Mithai Shop",       emoji:"🍬", baseCost:220, tiers:[{income:15,appeal:2,idle:0},{income:30,appeal:4,idle:5,upgradeCost:400},{income:60,appeal:7,idle:10,upgradeCost:800}]},
-  saree:     {name:"Saree Boutique",    emoji:"🥻", baseCost:350, tiers:[{income:25,appeal:3,idle:0},{income:50,appeal:6,idle:8,upgradeCost:650},{income:100,appeal:10,idle:16,upgradeCost:1300}]},
-  jewel:     {name:"Johari Jewellery",  emoji:"💍", baseCost:600, tiers:[{income:45,appeal:5,idle:0},{income:90,appeal:9,idle:14,upgradeCost:1100},{income:180,appeal:15,idle:28,upgradeCost:2200}]},
-  spice:     {name:"Spice Stall",       emoji:"🌶️", baseCost:160, tiers:[{income:11,appeal:2,idle:0},{income:22,appeal:3,idle:3,upgradeCost:300},{income:44,appeal:5,idle:7,upgradeCost:600}]},
-  handicraft:{name:"Handicraft Shop",   emoji:"🏺", baseCost:300, tiers:[{income:20,appeal:2,idle:0},{income:40,appeal:4,idle:6,upgradeCost:550},{income:80,appeal:7,idle:12,upgradeCost:1100}]},
-  book:      {name:"Bookstall",         emoji:"📚", baseCost:150, tiers:[{income:10,appeal:1,idle:0},{income:20,appeal:2,idle:3,upgradeCost:280},{income:40,appeal:4,idle:6,upgradeCost:560}]},
+  chai:      {name:"Chai Tapri",       emoji:"☕", baseCost:40,  tiers:[{cap:2,dwell:2.0,price:8},{cap:3,dwell:1.6,price:14,upgradeCost:80},{cap:4,dwell:1.3,price:22,upgradeCost:200}]},
+  vadapav:   {name:"Vada Pav Cart",    emoji:"🥪", baseCost:70,  tiers:[{cap:2,dwell:2.5,price:14},{cap:3,dwell:2.0,price:24,upgradeCost:140},{cap:4,dwell:1.6,price:38,upgradeCost:320}]},
+  chaat:     {name:"Chaat Corner",     emoji:"🍛", baseCost:100, tiers:[{cap:2,dwell:3.0,price:18},{cap:3,dwell:2.4,price:30,upgradeCost:180},{cap:4,dwell:2.0,price:48,upgradeCost:380}]},
+  kulfi:     {name:"Kulfi Cart",       emoji:"🍨", baseCost:90,  tiers:[{cap:2,dwell:2.2,price:12},{cap:3,dwell:1.8,price:20,upgradeCost:160},{cap:4,dwell:1.5,price:32,upgradeCost:340}]},
+  mithai:    {name:"Mithai Shop",      emoji:"🍬", baseCost:220, tiers:[{cap:3,dwell:3.5,price:35},{cap:4,dwell:3.0,price:60,upgradeCost:400},{cap:5,dwell:2.5,price:95,upgradeCost:800}]},
+  saree:     {name:"Saree Boutique",   emoji:"🥻", baseCost:350, tiers:[{cap:2,dwell:5.0,price:70},{cap:3,dwell:4.2,price:120,upgradeCost:650},{cap:4,dwell:3.5,price:190,upgradeCost:1300}]},
+  jewel:     {name:"Johari Jewellery", emoji:"💍", baseCost:600, tiers:[{cap:2,dwell:6.0,price:130},{cap:3,dwell:5.0,price:220,upgradeCost:1100},{cap:3,dwell:4.0,price:340,upgradeCost:2200}]},
+  spice:     {name:"Spice Stall",      emoji:"🌶️", baseCost:160, tiers:[{cap:2,dwell:2.8,price:22},{cap:3,dwell:2.3,price:36,upgradeCost:300},{cap:4,dwell:1.9,price:56,upgradeCost:600}]},
+  handicraft:{name:"Handicraft Shop",  emoji:"🏺", baseCost:300, tiers:[{cap:2,dwell:4.0,price:45},{cap:3,dwell:3.3,price:75,upgradeCost:550},{cap:4,dwell:2.8,price:115,upgradeCost:1100}]},
+  book:      {name:"Bookstall",        emoji:"📚", baseCost:150, tiers:[{cap:2,dwell:3.2,price:20},{cap:3,dwell:2.6,price:34,upgradeCost:280},{cap:4,dwell:2.2,price:54,upgradeCost:560}]},
 };
 
+// decorations are global flow-modifiers you buy for the current city (stackable, capped)
 const DECORATIONS = {
-  rangoli:  {name:"Rangoli Mat",        emoji:"🎨", cost:80,  appeal:2},
-  diya:     {name:"Diya String Lights", emoji:"🪔", cost:120, appeal:3},
-  bench:    {name:"Street Bench",       emoji:"🪑", cost:60,  appeal:1},
-  tulsi:    {name:"Tulsi Plant",        emoji:"🌿", cost:50,  appeal:1},
-  lamp:     {name:"Street Lamp",        emoji:"🏮", cost:90,  appeal:2},
-  rickshaw: {name:"Auto Rickshaw Prop", emoji:"🛺", cost:200, appeal:4},
+  bench:    {name:"Street Bench",       emoji:"🪑", cost:70,  desc:"-8% customer walking speed (they linger longer)", effect:{speedPct:-0.08}, maxStack:3},
+  newsstand:{name:"Newsstand",          emoji:"📰", cost:90,  desc:"-6% speed + small passive income", effect:{speedPct:-0.06, idleIncome:1.5}, maxStack:3},
+  music:    {name:"Music Ads",          emoji:"🎶", cost:150, desc:"+20% customer spawn rate", effect:{spawnPct:0.20}, maxStack:3},
+  busstop:  {name:"Bus Stop",           emoji:"🚌", cost:300, desc:"Every 9s, a busload of 3 customers arrives", effect:{burst:true}, maxStack:1},
+  rangoli:  {name:"Rangoli Mat",        emoji:"🎨", cost:80,  desc:"+10% customer spawn rate", effect:{spawnPct:0.10}, maxStack:2},
+  diya:     {name:"Diya Lights",        emoji:"🪔", cost:120, desc:"-5% speed, feels festive", effect:{speedPct:-0.05}, maxStack:2},
 };
 
 const CITIES = [
-  {id:"mumbai",  name:"Mumbai Chowpatty Lane", desc:"Where every dream in the bazaar business begins.", unlockRep:0,    plots:6, shops:["chai","vadapav","chaat","kulfi"]},
-  {id:"delhi",   name:"Delhi Chandni Chowk",   desc:"Glittering lanes of silk and spice.",              unlockRep:600,  plots:7, shops:["saree","jewel","mithai","spice","chai"]},
-  {id:"jaipur",  name:"Jaipur Johari Bazaar",  desc:"The Pink City's jewel of jewel-markets.",           unlockRep:1500, plots:7, shops:["jewel","handicraft","saree","chai"]},
-  {id:"kolkata", name:"Kolkata College Street",desc:"Books, sweets, and adda over cutting chai.",        unlockRep:2800, plots:7, shops:["book","mithai","chai","chaat"]},
-  {id:"kochi",   name:"Kochi Spice Market",    desc:"The scent of cardamom drifts down the backwaters.", unlockRep:4500, plots:8, shops:["spice","handicraft","kulfi","vadapav"]},
-  {id:"goa",     name:"Goa Night Market",      desc:"The grand finale — every stall, every flavour.",    unlockRep:7000, plots:9, shops:Object.keys(SHOP_TYPES)},
+  {id:"mumbai",  name:"Mumbai Chowpatty Lane", desc:"Where every dream in the bazaar business begins.", unlockRep:0,    slots:6, shops:["chai","vadapav","chaat","kulfi"], moneyRange:[40,90]},
+  {id:"delhi",   name:"Delhi Chandni Chowk",   desc:"Glittering lanes of silk and spice.",              unlockRep:600,  slots:7, shops:["saree","jewel","mithai","spice","chai"], moneyRange:[70,150]},
+  {id:"jaipur",  name:"Jaipur Johari Bazaar",  desc:"The Pink City's jewel of jewel-markets.",           unlockRep:1500, slots:7, shops:["jewel","handicraft","saree","chai"], moneyRange:[90,190]},
+  {id:"kolkata", name:"Kolkata College Street",desc:"Books, sweets, and adda over cutting chai.",        unlockRep:2800, slots:7, shops:["book","mithai","chai","chaat"], moneyRange:[60,130]},
+  {id:"kochi",   name:"Kochi Spice Market",    desc:"The scent of cardamom drifts down the backwaters.", unlockRep:4500, slots:8, shops:["spice","handicraft","kulfi","vadapav"], moneyRange:[80,170]},
+  {id:"goa",     name:"Goa Night Market",      desc:"The grand finale — every stall, every flavour.",    unlockRep:7000, slots:9, shops:Object.keys(SHOP_TYPES), moneyRange:[120,260]},
 ];
 
 const FESTIVALS = [
@@ -336,16 +361,18 @@ const FESTIVALS = [
 ];
 
 const ACHIEVEMENTS = [
-  {id:"first_shop", label:"First Dukaan!", test:s=>Object.values(s.cities).some(c=>c.shops.some(p=>p)) },
-  {id:"rich_1000",  label:"₹1,000 earned lifetime", test:s=>s.lifetimeEarned>=1000 },
-  {id:"rich_10000", label:"₹10,000 earned lifetime", test:s=>s.lifetimeEarned>=10000 },
+  {id:"first_shop", label:"First Dukaan!", test:s=>Object.values(s.cities).some(c=>c.slots.some(p=>p)) },
+  {id:"first_perfect", label:"First Perfect Day (goal hit!)", test:s=>s.perfectDays>=1 },
+  {id:"rich_5000",  label:"₹5,000 earned lifetime", test:s=>s.lifetimeEarned>=5000 },
+  {id:"rich_25000", label:"₹25,000 earned lifetime", test:s=>s.lifetimeEarned>=25000 },
   {id:"rep_1000",   label:"1,000 reputation", test:s=>s.reputation>=1000 },
   {id:"festival_1", label:"First festival hosted", test:s=>s.festivalsHosted>=1 },
-  {id:"all_cities",  label:"Unlocked every city!", test:s=>CITIES.every(c=>s.reputation>=c.unlockRep) },
+  {id:"all_cities", label:"Unlocked every city!", test:s=>CITIES.every(c=>s.reputation>=c.unlockRep) },
+  {id:"streak_5",   label:"5 Perfect Days in a row", test:s=>s.perfectStreak>=5 },
 ];
 
 /* ============================= STORAGE ============================= */
-const SAVE_KEY = "dukaan_dreams_save_v1";
+const SAVE_KEY = "dukaan_dreams_save_v2";
 const MemStore = {};
 function storageSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){ MemStore[k]=v; } }
 function storageGet(k){ try{ return localStorage.getItem(k); }catch(e){ return MemStore[k]||null; } }
@@ -353,22 +380,25 @@ function storageGet(k){ try{ return localStorage.getItem(k); }catch(e){ return M
 /* ============================= STATE ============================= */
 function freshState(){
   const cities = {};
-  CITIES.forEach(c=>{
-    cities[c.id] = { shops:new Array(c.plots).fill(null), decos:[] };
-  });
+  CITIES.forEach(c=>{ cities[c.id] = { slots:new Array(c.slots).fill(null), decos:{} }; });
   return {
     money:150,
     reputation:0,
     day:1,
+    dayCash:0,
+    dayGoal: computeGoal(1,0),
+    perfectDays:0,
+    perfectStreak:0,
     lifetimeEarned:0,
     festivalsHosted:0,
     currentCity:"mumbai",
-    activeFestival:null, // {id, endsDay}
+    activeFestival:null,
     festivalCooldowns:{},
     unlockedAch:[],
     cities
   };
 }
+function computeGoal(day, cityIdx){ return Math.round(120 + (day-1)*22 + cityIdx*80); }
 
 let state = loadState();
 function loadState(){
@@ -376,24 +406,29 @@ function loadState(){
   if(!raw) return freshState();
   try{
     const parsed = JSON.parse(raw);
-    // merge in case new cities/shops were added since save
     const fresh = freshState();
     CITIES.forEach(c=>{
       if(!parsed.cities[c.id]) parsed.cities[c.id] = fresh.cities[c.id];
-      if(parsed.cities[c.id].shops.length < c.plots){
-        while(parsed.cities[c.id].shops.length < c.plots) parsed.cities[c.id].shops.push(null);
+      if(parsed.cities[c.id].slots.length < c.slots){
+        while(parsed.cities[c.id].slots.length < c.slots) parsed.cities[c.id].slots.push(null);
       }
+      if(!parsed.cities[c.id].decos) parsed.cities[c.id].decos = {};
     });
     return Object.assign(fresh, parsed);
   }catch(e){ return freshState(); }
 }
 function saveState(){ storageSet(SAVE_KEY, JSON.stringify(state)); }
 
-let customers = []; // {plotIndex, shopId, patience, maxPatience, id}
+let customers = [];   // {id, x, money, state:'walking'|'inshop', slotIndex, dwellRemaining, visited:Set}
 let custIdSeq = 1;
+let paused = false;
+let dayTimer = DAY_DURATION_S;
+let spawnAcc = 0;
+let burstAcc = 0;
 
 /* ============================= HELPERS ============================= */
 function cityDef(id){ return CITIES.find(c=>c.id===id); }
+function cityIndex(id){ return CITIES.findIndex(c=>c.id===id); }
 function currentCityDef(){ return cityDef(state.currentCity); }
 function currentCityState(){ return state.cities[state.currentCity]; }
 function fmt(n){ return Math.round(n).toLocaleString('en-IN'); }
@@ -405,12 +440,19 @@ function isFestivalActiveFor(shopId){
   return null;
 }
 
-function totalAppeal(cityId){
-  const cs = state.cities[cityId];
-  let total = 0;
-  cs.shops.forEach(p=>{ if(p){ total += SHOP_TYPES[p.shopId].tiers[p.tier].appeal; } });
-  cs.decos.forEach(d=>{ total += DECORATIONS[d].appeal; });
-  return total;
+function cityModifiers(){
+  const decos = currentCityState().decos;
+  let speedPct = 0, spawnPct = 0, idleIncome = 0, hasBurst=false;
+  Object.entries(decos).forEach(([id,count])=>{
+    const d = DECORATIONS[id];
+    if(!d || !count) return;
+    if(d.effect.speedPct) speedPct += d.effect.speedPct*count;
+    if(d.effect.spawnPct) spawnPct += d.effect.spawnPct*count;
+    if(d.effect.idleIncome) idleIncome += d.effect.idleIncome*count;
+    if(d.effect.burst) hasBurst = true;
+  });
+  speedPct = Math.max(speedPct, -0.5); // don't let speed go below half
+  return {speedPct, spawnPct, idleIncome, hasBurst};
 }
 
 function toast(msg){
@@ -437,12 +479,16 @@ function render(){
   document.getElementById('moneyStat').textContent = "₹"+fmt(state.money);
   document.getElementById('repStat').textContent = fmt(state.reputation);
   document.getElementById('dayStat').textContent = state.day;
+  document.getElementById('goalStat').textContent = fmt(state.dayGoal);
+  document.getElementById('timerStat').textContent = Math.ceil(dayTimer);
+  document.getElementById('goalFill').style.width = Math.min(100, state.dayCash/state.dayGoal*100)+'%';
 
   renderFestivalBanner();
   renderCityTabs();
-  renderStreet();
+  renderShopsRow();
   renderShopList();
   renderDecoList();
+  renderDecoOwnedStrip();
   renderAchievements();
 }
 
@@ -451,7 +497,7 @@ function renderFestivalBanner(){
   if(state.activeFestival){
     const fest = FESTIVALS.find(f=>f.id===state.activeFestival.id);
     el.style.display='flex';
-    el.innerHTML = `<span>${fest.emoji} <b>${fest.name}</b> is live! ${fest.mult}x income on ${fest.boost.map(s=>SHOP_TYPES[s].name).join(' & ')} — ends Day ${state.activeFestival.endsDay}.</span>`;
+    el.innerHTML = `<span>${fest.emoji} <b>${fest.name}</b> is live! ${fest.mult}x price on ${fest.boost.map(s=>SHOP_TYPES[s].name).join(' & ')} — ends Day ${state.activeFestival.endsDay}.</span>`;
   } else {
     const next = FESTIVALS.find(f=> state.day >= f.minDay && (!state.festivalCooldowns[f.id] || state.day >= state.festivalCooldowns[f.id]) );
     if(next){
@@ -470,56 +516,47 @@ function renderCityTabs(){
     const unlocked = state.reputation >= c.unlockRep;
     const div = document.createElement('div');
     div.className = 'city-tab' + (c.id===state.currentCity?' active':'') + (!unlocked?' locked':'');
-    div.innerHTML = `${c.name}<small>${unlocked? (c.plots+' plots') : ('🔒 needs ⭐'+fmt(c.unlockRep))}</small>`;
-    if(unlocked){ div.onclick = ()=>{ state.currentCity=c.id; customers=[]; render(); }; }
+    div.innerHTML = `${c.name}<small>${unlocked? (c.slots+' shop slots') : ('🔒 needs ⭐'+fmt(c.unlockRep))}</small>`;
+    if(unlocked){ div.onclick = ()=>{ switchCity(c.id); }; }
     wrap.appendChild(div);
   });
 }
 
-function renderStreet(){
+function switchCity(id){
+  state.currentCity = id;
+  customers = [];
+  document.getElementById('sidewalkActors').innerHTML = '';
+  state.dayGoal = computeGoal(state.day, cityIndex(id));
+  render();
+}
+
+function renderShopsRow(){
   const cdef = currentCityDef();
   const cs = currentCityState();
   document.getElementById('cityName').textContent = cdef.name;
   document.getElementById('cityDesc').textContent = cdef.desc;
 
-  const decoStrip = document.getElementById('decoStrip');
-  decoStrip.innerHTML = cs.decos.map(d=>`<span class="deco-chip" title="${DECORATIONS[d].name}">${DECORATIONS[d].emoji}</span>`).join('');
-
-  const grid = document.getElementById('streetGrid');
-  grid.innerHTML = '';
-  cs.shops.forEach((placed, idx)=>{
-    const plot = document.createElement('div');
-    plot.className = 'plot' + (placed?' filled':'');
-    plot.dataset.idx = idx;
+  const row = document.getElementById('shopsRow');
+  row.innerHTML = '';
+  cs.slots.forEach((placed, idx)=>{
+    const slot = document.createElement('div');
+    slot.className = 'shop-slot' + (placed?' filled':'');
     if(placed){
       const type = SHOP_TYPES[placed.shopId];
       const tierInfo = type.tiers[placed.tier];
-      plot.innerHTML = `<div class="emoji">${type.emoji}</div>
+      const occ = placed.occupancy||0;
+      slot.innerHTML = `
+        <div class="cap-label">${occ}/${tierInfo.cap}</div>
+        <div class="cap-bar"><div class="cap-fill" style="width:${occ/tierInfo.cap*100}%;"></div></div>
+        <div class="emoji">${type.emoji}</div>
         <div class="shop-name">${type.name}</div>
         <div class="tier-stars">${'★'.repeat(placed.tier+1)}${'☆'.repeat(2-placed.tier)}</div>`;
-      plot.onclick = ()=>openShopModal(idx);
+      slot.onclick = ()=>openShopModal(idx);
     } else {
-      plot.innerHTML = `<div class="add-icon">+</div><div class="shop-name">Build here</div>`;
-      plot.onclick = ()=>openBuildModal(idx);
+      slot.innerHTML = `<div class="add-icon">+</div><div class="shop-name">Build here (slot ${idx+1})</div>`;
+      slot.onclick = ()=>openBuildModal(idx);
     }
-    // customer bubble
-    const c = customers.find(c=>c.plotIndex===idx && c.cityId===state.currentCity);
-    if(c){
-      const bubble = document.createElement('div');
-      bubble.className = 'customer-bubble';
-      bubble.textContent = '🙋 ' + SHOP_TYPES[c.shopId].emoji;
-      bubble.onclick = (e)=>{ e.stopPropagation(); serveCustomer(c.id); };
-      plot.appendChild(bubble);
-
-      const pbar = document.createElement('div');
-      pbar.className = 'patience-bar';
-      const pfill = document.createElement('div');
-      pfill.className = 'patience-fill';
-      pfill.style.width = Math.max(0,(c.patience/c.maxPatience*100))+'%';
-      pbar.appendChild(pfill);
-      plot.appendChild(pbar);
-    }
-    grid.appendChild(plot);
+    row.appendChild(slot);
   });
 }
 
@@ -531,14 +568,15 @@ function renderShopList(){
     const type = SHOP_TYPES[shopId];
     const row = document.createElement('div');
     row.className = 'shop-list-item';
-    row.innerHTML = `<span>${type.emoji} ${type.name} <br><small>₹${fmt(type.baseCost)} · appeal ${type.tiers[0].appeal}</small></span>`;
+    row.innerHTML = `<span>${type.emoji} ${type.name} <br><small>₹${fmt(type.baseCost)} · cap ${type.tiers[0].cap} · ₹${type.tiers[0].price}/visit</small></span>`;
     const btn = document.createElement('button');
     btn.className='buy-btn';
     btn.textContent='Build';
-    btn.disabled = state.money < type.baseCost || !currentCityState().shops.includes(null);
+    const hasSlot = currentCityState().slots.includes(null);
+    btn.disabled = state.money < type.baseCost || !hasSlot;
     btn.onclick = ()=>{
-      const emptyIdx = currentCityState().shops.findIndex(p=>p===null);
-      if(emptyIdx===-1){ toast("No empty plots left here!"); return; }
+      const emptyIdx = currentCityState().slots.findIndex(p=>p===null);
+      if(emptyIdx===-1){ toast("No empty slots left here!"); return; }
       buildShop(emptyIdx, shopId);
     };
     row.appendChild(btn);
@@ -549,25 +587,37 @@ function renderShopList(){
 function renderDecoList(){
   const wrap = document.getElementById('decoShopList');
   wrap.innerHTML = '';
+  const owned = currentCityState().decos;
   Object.entries(DECORATIONS).forEach(([id,d])=>{
+    const count = owned[id]||0;
     const row = document.createElement('div');
     row.className = 'deco-list-item';
-    row.innerHTML = `<span>${d.emoji} ${d.name} <br><small>₹${fmt(d.cost)} · +${d.appeal} appeal</small></span>`;
+    row.innerHTML = `<span>${d.emoji} ${d.name} ${count?('x'+count):''}<br><small>₹${fmt(d.cost)} · ${d.desc}</small></span>`;
     const btn = document.createElement('button');
     btn.className='buy-btn';
-    btn.textContent='Place';
-    btn.disabled = state.money < d.cost;
+    btn.textContent='Buy';
+    btn.disabled = state.money < d.cost || count>=d.maxStack;
     btn.onclick = ()=>{
-      if(state.money < d.cost) return;
+      if(state.money < d.cost || count>=d.maxStack) return;
       state.money -= d.cost;
-      currentCityState().decos.push(id);
-      toast(`Placed ${d.name}! +${d.appeal} appeal`);
+      owned[id] = count+1;
+      toast(`Placed ${d.name}!`);
       checkAchievements();
       saveState(); render();
     };
     row.appendChild(btn);
     wrap.appendChild(row);
   });
+}
+
+function renderDecoOwnedStrip(){
+  const owned = currentCityState().decos;
+  const wrap = document.getElementById('decoOwnedStrip');
+  let html = '';
+  Object.entries(owned).forEach(([id,count])=>{
+    if(count>0){ for(let i=0;i<count;i++) html += `<span class="deco-chip" title="${DECORATIONS[id].name}">${DECORATIONS[id].emoji}</span>`; }
+  });
+  wrap.innerHTML = html;
 }
 
 function renderAchievements(){
@@ -583,7 +633,7 @@ function buildShop(idx, shopId){
   const type = SHOP_TYPES[shopId];
   if(state.money < type.baseCost) return;
   state.money -= type.baseCost;
-  currentCityState().shops[idx] = {shopId, tier:0};
+  currentCityState().slots[idx] = {shopId, tier:0, occupancy:0};
   toast(`Opened a new ${type.name}! ${type.emoji}`);
   checkAchievements();
   saveState(); render();
@@ -595,23 +645,26 @@ function openBuildModal(idx){
     const t = SHOP_TYPES[shopId];
     const affordable = state.money >= t.baseCost;
     return `<button class="modal-btn ${affordable?'':'secondary'}" ${affordable?'':'disabled'} onclick="buildShop(${idx},'${shopId}');closeModal();">
-      ${t.emoji} ${t.name} — ₹${fmt(t.baseCost)}
+      ${t.emoji} ${t.name} — ₹${fmt(t.baseCost)} <br><small>cap ${t.tiers[0].cap} · dwell ${t.tiers[0].dwell}s · ₹${t.tiers[0].price}/visit</small>
     </button>`;
   }).join('');
-  showModal(`<h3><span class="close-x" onclick="closeModal()">✕</span>Build a Shop</h3>
-    <p style="font-size:13px;color:#7a5c47;">Choose what to open on this plot:</p>
+  showModal(`<h3><span class="close-x" onclick="closeModal()">✕</span>Build on Slot ${idx+1}</h3>
+    <p style="font-size:13px;color:#7a5c47;">Tip: place fast, cheap shops toward the start of the street so more customers still have money left when they reach your pricier ones later.</p>
     ${options}`);
 }
 
 function openShopModal(idx){
-  const placed = currentCityState().shops[idx];
+  const placed = currentCityState().slots[idx];
   const type = SHOP_TYPES[placed.shopId];
   const tierInfo = type.tiers[placed.tier];
   const nextTier = type.tiers[placed.tier+1];
   let html = `<h3><span class="close-x" onclick="closeModal()">✕</span>${type.emoji} ${type.name}</h3>
-    <p style="font-size:13px;">Tier ${placed.tier+1} of 3 · Serve income ₹${tierInfo.income} · Appeal ${tierInfo.appeal}${tierInfo.idle?(' · Idle +₹'+tierInfo.idle+'/tick'):''}</p>`;
+    <p class="stat-line">Tier ${placed.tier+1} of ${type.tiers.length} — Slot ${idx+1}</p>
+    <p class="stat-line">Capacity: ${tierInfo.cap} customers at once</p>
+    <p class="stat-line">Dwell time: ${tierInfo.dwell}s per visit</p>
+    <p class="stat-line">Price: ₹${tierInfo.price} per customer</p>`;
   if(nextTier){
-    html += `<button class="modal-btn" ${state.money<nextTier.upgradeCost?'disabled':''} onclick="upgradeShop(${idx});closeModal();">⬆️ Upgrade — ₹${fmt(nextTier.upgradeCost)}</button>`;
+    html += `<button class="modal-btn" ${state.money<nextTier.upgradeCost?'disabled':''} onclick="upgradeShop(${idx});closeModal();">⬆️ Upgrade — ₹${fmt(nextTier.upgradeCost)} (cap ${nextTier.cap}, ₹${nextTier.price}/visit)</button>`;
   } else {
     html += `<p style="font-size:12px;color:#7a5c47;">🌟 Maxed out! This shop is at its best.</p>`;
   }
@@ -620,7 +673,7 @@ function openShopModal(idx){
 }
 
 function upgradeShop(idx){
-  const placed = currentCityState().shops[idx];
+  const placed = currentCityState().slots[idx];
   const type = SHOP_TYPES[placed.shopId];
   const nextTier = type.tiers[placed.tier+1];
   if(!nextTier || state.money < nextTier.upgradeCost) return;
@@ -632,33 +685,13 @@ function upgradeShop(idx){
 }
 
 function sellShop(idx){
-  const placed = currentCityState().shops[idx];
+  const placed = currentCityState().slots[idx];
   const type = SHOP_TYPES[placed.shopId];
   let refund = type.baseCost*0.5;
   for(let i=1;i<=placed.tier;i++) refund += type.tiers[i].upgradeCost*0.5;
   state.money += refund;
-  currentCityState().shops[idx] = null;
+  currentCityState().slots[idx] = null;
   toast(`Sold ${type.name} for ₹${fmt(refund)}`);
-  saveState(); render();
-}
-
-function serveCustomer(custId){
-  const idx = customers.findIndex(c=>c.id===custId);
-  if(idx===-1) return;
-  const c = customers[idx];
-  const placed = currentCityState().shops[c.plotIndex];
-  if(!placed) { customers.splice(idx,1); render(); return; }
-  const type = SHOP_TYPES[placed.shopId];
-  const tierInfo = type.tiers[placed.tier];
-  const fest = isFestivalActiveFor(placed.shopId);
-  const mult = fest ? fest.mult : 1;
-  const earn = Math.round(tierInfo.income * mult);
-  const rep = Math.round(tierInfo.income/4) + tierInfo.appeal;
-  state.money += earn;
-  state.lifetimeEarned += earn;
-  state.reputation += rep;
-  customers.splice(idx,1);
-  checkAchievements();
   saveState(); render();
 }
 
@@ -671,75 +704,165 @@ function startFestival(festId){
   saveState(); render();
 }
 
+/* ============================= SIMULATION ============================= */
+function spawnCustomer(){
+  const cdef = currentCityDef();
+  const [lo,hi] = cdef.moneyRange;
+  customers.push({
+    id: custIdSeq++,
+    x: -20,
+    money: Math.round(lo + Math.random()*(hi-lo)),
+    state: 'walking',
+    slotIndex: null,
+    dwellRemaining: 0,
+    visited: new Set()
+  });
+}
+
+function simTick(dtSec){
+  const mods = cityModifiers();
+  const cs = currentCityState();
+  const baseSpeed = 55; // px/sec
+  const speed = baseSpeed * (1+mods.speedPct);
+
+  // spawn
+  spawnAcc += dtSec*1000;
+  const interval = SPAWN_BASE_MS / (1+mods.spawnPct);
+  if(spawnAcc >= interval){
+    spawnAcc = 0;
+    if(Math.random() < 0.85) spawnCustomer();
+  }
+  if(mods.hasBurst){
+    burstAcc += dtSec*1000;
+    if(burstAcc >= 9000){
+      burstAcc = 0;
+      spawnCustomer(); spawnCustomer(); spawnCustomer();
+      toast("🚌 A busload of customers arrived!");
+    }
+  }
+
+  // idle income from newsstands
+  if(mods.idleIncome>0){
+    const gain = mods.idleIncome*dtSec;
+    state.money += gain;
+    state.dayCash += gain;
+    state.lifetimeEarned += gain;
+  }
+
+  const streetWidthPx = cs.slots.length*STEP + 80;
+
+  customers.forEach(c=>{
+    if(c.state==='walking'){
+      c.x += speed*dtSec;
+      const slotIdx = Math.floor(c.x/STEP);
+      if(slotIdx>=0 && slotIdx<cs.slots.length){
+        const placed = cs.slots[slotIdx];
+        if(placed && !c.visited.has(slotIdx) && c.money>0){
+          const type = SHOP_TYPES[placed.shopId];
+          const tierInfo = type.tiers[placed.tier];
+          if((placed.occupancy||0) < tierInfo.cap){
+            placed.occupancy = (placed.occupancy||0)+1;
+            c.state = 'inshop';
+            c.slotIndex = slotIdx;
+            c.dwellRemaining = tierInfo.dwell;
+            c.visited.add(slotIdx);
+          }
+        }
+      }
+    } else if(c.state==='inshop'){
+      c.dwellRemaining -= dtSec;
+      if(c.dwellRemaining<=0){
+        const placed = cs.slots[c.slotIndex];
+        if(placed){
+          const type = SHOP_TYPES[placed.shopId];
+          const tierInfo = type.tiers[placed.tier];
+          const fest = isFestivalActiveFor(placed.shopId);
+          const mult = fest?fest.mult:1;
+          const pay = Math.min(c.money, tierInfo.price*mult);
+          c.money -= pay;
+          state.money += pay;
+          state.dayCash += pay;
+          state.lifetimeEarned += pay;
+          placed.occupancy = Math.max(0,(placed.occupancy||0)-1);
+        }
+        c.state = 'walking';
+      }
+    }
+  });
+
+  customers = customers.filter(c=> c.x < streetWidthPx);
+}
+
+/* ============================= RENDER ACTORS (fast path) ============================= */
+function renderActors(){
+  const wrap = document.getElementById('sidewalkActors');
+  // reconcile DOM nodes with customers array
+  const existing = {};
+  wrap.querySelectorAll('.customer').forEach(el=>{ existing[el.dataset.id]=el; });
+  const seen = new Set();
+  customers.forEach(c=>{
+    seen.add(String(c.id));
+    let el = existing[c.id];
+    if(!el){
+      el = document.createElement('div');
+      el.className='customer';
+      el.dataset.id = c.id;
+      wrap.appendChild(el);
+    }
+    el.style.left = c.x+'px';
+    el.textContent = c.state==='inshop' ? '🛍️' : '🚶';
+  });
+  Object.keys(existing).forEach(id=>{
+    if(!seen.has(id)) existing[id].remove();
+  });
+}
+
+/* ============================= DAY CYCLE ============================= */
+function endDay(){
+  const metGoal = state.dayCash >= state.dayGoal;
+  const repGain = Math.round(state.dayCash/6) + (metGoal?60:0);
+  state.reputation += repGain;
+  if(metGoal){ state.perfectDays += 1; state.perfectStreak += 1; }
+  else { state.perfectStreak = 0; }
+
+  showModal(`<h3>📅 Day ${state.day} Complete</h3>
+    <p class="stat-line">Earned today: ₹${fmt(state.dayCash)} / Goal ₹${fmt(state.dayGoal)}</p>
+    <p class="stat-line">${metGoal? '🌟 Perfect day! +'+repGain+' reputation':'Reputation +'+repGain}</p>
+    <button class="modal-btn" onclick="beginNextDay();closeModal();">Start Day ${state.day+1} ▶</button>`);
+
+  // festival end check
+  if(state.activeFestival && state.day >= state.activeFestival.endsDay){
+    const fest = FESTIVALS.find(f=>f.id===state.activeFestival.id);
+    state.festivalCooldowns[fest.id] = state.day + fest.cooldown;
+    state.activeFestival = null;
+  }
+  checkAchievements();
+  saveState();
+}
+
+function beginNextDay(){
+  state.day += 1;
+  state.dayCash = 0;
+  state.dayGoal = computeGoal(state.day, cityIndex(state.currentCity));
+  dayTimer = DAY_DURATION_S;
+  customers = [];
+  document.getElementById('sidewalkActors').innerHTML='';
+  saveState();
+  render();
+}
+
+document.getElementById('nextDayBtn').onclick = ()=>{ endDay(); };
+document.getElementById('pauseBtn').onclick = ()=>{
+  paused = !paused;
+  document.getElementById('pauseBtn').textContent = paused? '▶ Resume':'⏸ Pause';
+};
+
 /* ============================= MODAL ============================= */
 function showModal(innerHtml){
   const root = document.getElementById('modalRoot');
   root.innerHTML = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">${innerHtml}</div></div>`;
 }
 function closeModal(){ document.getElementById('modalRoot').innerHTML=''; }
-
-/* ============================= GAME LOOP ============================= */
-function gameTick(){
-  // idle income across ALL cities (not just current, but reduced rate if not current for balance? keep simple: only current city idles for clarity)
-  const cs = currentCityState();
-  let idleGain = 0;
-  cs.shops.forEach(p=>{
-    if(p){
-      const tierInfo = SHOP_TYPES[p.shopId].tiers[p.tier];
-      if(tierInfo.idle){
-        const fest = isFestivalActiveFor(p.shopId);
-        idleGain += tierInfo.idle * (fest?fest.mult:1);
-      }
-    }
-  });
-  if(idleGain>0){
-    state.money += idleGain;
-    state.lifetimeEarned += idleGain;
-  }
-
-  // spawn customers
-  const appeal = totalAppeal(state.currentCity);
-  const builtIdxs = cs.shops.map((p,i)=>p?i:null).filter(i=>i!==null);
-  const activeInCity = customers.filter(c=>c.cityId===state.currentCity).length;
-  const spawnChance = Math.min(0.55, 0.06*builtIdxs.length + 0.015*appeal);
-  if(builtIdxs.length>0 && activeInCity < 6 && Math.random() < spawnChance){
-    // pick a plot without an existing customer
-    const free = builtIdxs.filter(i=> !customers.some(c=>c.plotIndex===i && c.cityId===state.currentCity));
-    if(free.length>0){
-      const idx = free[Math.floor(Math.random()*free.length)];
-      const shopId = cs.shops[idx].shopId;
-      customers.push({id:custIdSeq++, cityId:state.currentCity, plotIndex:idx, shopId, patience:100, maxPatience:100});
-    }
-  }
-
-  // decay patience
-  customers = customers.filter(c=>{
-    if(c.cityId!==state.currentCity) return true;
-    c.patience -= 9;
-    if(c.patience<=0){
-      state.reputation = Math.max(0, state.reputation-2);
-      return false;
-    }
-    return true;
-  });
-
-  // festival end check
-  if(state.activeFestival && state.day >= state.activeFestival.endsDay){
-    const fest = FESTIVALS.find(f=>f.id===state.activeFestival.id);
-    state.festivalCooldowns[fest.id] = state.day + fest.cooldown;
-    toast(`${fest.emoji} ${fest.name} has ended. Thanks for celebrating!`);
-    state.activeFestival = null;
-  }
-
-  saveState();
-  render();
-}
-
-function dayTick(){
-  state.day += 1;
-  saveState();
-  render();
-}
 
 /* ============================= NOTE ============================= */
 document.getElementById('noteBtn').onclick = ()=>{
@@ -751,10 +874,24 @@ document.getElementById('noteBtn').onclick = ()=>{
   <button class="modal-btn" onclick="closeModal()">🥰</button>`);
 };
 
-/* ============================= INIT ============================= */
+/* ============================= MAIN LOOP ============================= */
 render();
-setInterval(gameTick, 1500);
-setInterval(dayTick, 45000);
+setInterval(()=>{
+  if(paused) return;
+  simTick(TICK_MS/1000);
+  dayTimer -= TICK_MS/1000;
+  if(dayTimer<=0){
+    dayTimer = 0;
+    endDay();
+  }
+  // lightweight render: update stats + actors + shop occupancy every tick, full list rebuilds less often
+  document.getElementById('moneyStat').textContent = "₹"+fmt(state.money);
+  document.getElementById('timerStat').textContent = Math.ceil(dayTimer);
+  document.getElementById('goalFill').style.width = Math.min(100, state.dayCash/state.dayGoal*100)+'%';
+  renderActors();
+  renderShopsRow();
+}, TICK_MS);
+setInterval(saveState, 5000);
 </script>
 </body>
 </html>
