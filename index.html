@@ -19,6 +19,7 @@
       linear-gradient(160deg,#FFF3DA 0%,#FFE3C2 40%,#FFD3E4 100%);
     color:var(--ink); min-height:100vh; padding-bottom:40px;
   }
+  body.fullscreen-mode{padding-bottom:0;}
   .topbar{
     background:linear-gradient(120deg,var(--deep-pink),var(--saffron)); color:#fff;
     padding:12px 20px; display:flex; align-items:center; justify-content:space-between;
@@ -29,42 +30,26 @@
   .brand h1{font-size:19px;margin:0;letter-spacing:0.5px;}
   .brand small{display:block;font-weight:400;opacity:0.9;font-size:11px;}
   .stats{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
-  .stat-pill{
-    background:rgba(255,255,255,0.22); border-radius:999px; padding:6px 12px;
-    font-weight:700; font-size:13px; display:flex;align-items:center;gap:6px;
-  }
+  .stat-pill{background:rgba(255,255,255,0.22); border-radius:999px; padding:6px 12px;font-weight:700; font-size:13px; display:flex;align-items:center;gap:6px;}
   .stat-pill img{width:16px;height:16px;object-fit:contain;}
   .goal-wrap{display:flex;flex-direction:column;align-items:flex-start;min-width:130px;}
   .goal-track{width:130px;height:9px;background:rgba(255,255,255,0.35);border-radius:6px;overflow:hidden;margin-top:2px;}
   .goal-fill{height:100%;background:var(--gold);transition:width .3s;}
   .goal-label{font-size:10px;opacity:0.9;}
+  .fs-btn{background:rgba(255,255,255,0.25);border:none;color:#fff;border-radius:10px;padding:8px 12px;font-weight:800;cursor:pointer;font-size:13px;}
 
   .container{max-width:1150px;margin:0 auto;padding:16px;}
+  body.fullscreen-mode .container{max-width:100%;padding:10px;}
 
-  .festival-banner{
-    background:linear-gradient(90deg,var(--gold),var(--marigold)); color:var(--ink);
-    border-radius:16px; padding:10px 18px; margin:14px 0; box-shadow:var(--shadow);
-    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
-    font-weight:600;font-size:13px;
-  }
-  .festival-banner button{
-    background:var(--deep-pink);color:#fff;border:none;padding:8px 16px;border-radius:999px;
-    font-weight:700;cursor:pointer;
-  }
+  .festival-banner{background:linear-gradient(90deg,var(--gold),var(--marigold)); color:var(--ink);border-radius:16px; padding:10px 18px; margin:14px 0; box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-weight:600;font-size:13px;}
+  .festival-banner button{background:var(--deep-pink);color:#fff;border:none;padding:8px 16px;border-radius:999px;font-weight:700;cursor:pointer;}
 
   .city-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-top:6px;align-items:center;}
-  .city-tab{
-    flex:0 0 auto; background:var(--panel); border:2px solid transparent; border-radius:14px;
-    padding:10px 16px; cursor:pointer; font-weight:700; box-shadow:var(--shadow);
-    white-space:nowrap; opacity:0.9; font-size:13px;
-  }
+  .city-tab{flex:0 0 auto; background:var(--panel); border:2px solid transparent; border-radius:14px;padding:10px 16px; cursor:pointer; font-weight:700; box-shadow:var(--shadow);white-space:nowrap; opacity:0.9; font-size:13px;}
   .city-tab.active{border-color:var(--deep-pink);background:linear-gradient(120deg,#fff,#FFE9D6);}
   .city-tab.locked{opacity:0.5;cursor:not-allowed;}
   .city-tab small{display:block;font-weight:400;font-size:10px;}
-  .map-btn{
-    flex:0 0 auto;background:linear-gradient(120deg,var(--teal),#0b6668);color:#fff;border:none;
-    border-radius:14px;padding:10px 16px;font-weight:800;cursor:pointer;box-shadow:var(--shadow);font-size:13px;
-  }
+  .map-btn{flex:0 0 auto;background:linear-gradient(120deg,var(--teal),#0b6668);color:#fff;border:none;border-radius:14px;padding:10px 16px;font-weight:800;cursor:pointer;box-shadow:var(--shadow);font-size:13px;}
 
   .street-card{background:var(--panel);border-radius:20px;padding:18px;margin-top:14px;box-shadow:var(--shadow);}
   .street-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;}
@@ -75,73 +60,89 @@
   .btn-pause{background:#eee;color:var(--ink);}
   .btn-nextday{background:linear-gradient(120deg,var(--saffron),var(--deep-pink));color:#fff;}
 
-  .street-scene{
-    position:relative; border-radius:16px; overflow:hidden;
-    background:linear-gradient(180deg,#BEE7F5 0%,#BEE7F5 42%,#F3D9AE 42%,#F3D9AE 76%,#7d7d86 76%,#7d7d86 100%);
-    height:310px;
-  }
-  .skyline-img{
-    position:absolute;left:0;right:0;top:0;height:46%;width:100%;
-    object-fit:cover;object-position:bottom center;opacity:0.92;
-  }
+  .street-scene{position:relative; border-radius:16px; overflow:hidden;background:linear-gradient(180deg,#BEE7F5 0%,#BEE7F5 42%,#F3D9AE 42%,#F3D9AE 76%,#7d7d86 76%,#7d7d86 100%);height:310px;}
+  body.fullscreen-mode .street-scene{height:calc(100vh - 260px);}
+  .skyline-img{position:absolute;left:0;right:0;top:0;height:46%;width:100%;object-fit:cover;object-position:bottom center;opacity:0.92;}
   .cloud{position:absolute;top:8px;font-size:24px;opacity:0.9;animation:drift 45s linear infinite;z-index:2;}
   @keyframes drift{ from{left:-10%;} to{left:110%;} }
 
-  .shops-row{
-    position:absolute; bottom:24%; left:0; height:190px; display:flex; gap:14px;
-    padding-left:14px; align-items:flex-end; z-index:3;
-  }
-  .shop-slot{
-    width:160px;height:190px;flex:0 0 auto;cursor:pointer;position:relative;
-    display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-  }
+  .street-scroll{position:absolute;inset:0;overflow-x:auto;overflow-y:hidden;}
+  .street-inner{position:relative;height:100%;min-width:100%;}
+
+  .shops-row{position:absolute; bottom:24%; left:0; height:190px; display:flex; gap:14px;padding-left:14px; align-items:flex-end; z-index:3;}
+  .shop-slot{width:160px;height:190px;flex:0 0 auto;cursor:pointer;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;}
   .shop-slot .shop-img{width:100%;height:140px;object-fit:contain;filter:drop-shadow(0 5px 5px rgba(0,0,0,0.28));}
   .shop-slot svg{width:100%;height:140px;filter:drop-shadow(0 4px 4px rgba(0,0,0,0.2));}
-  .shop-label{
-    background:#fff;border-radius:9px;padding:3px 8px;font-size:10.5px;font-weight:800;
-    text-align:center;margin-top:5px;box-shadow:0 2px 6px rgba(0,0,0,.15);line-height:1.35;
-    max-width:150px;
-  }
+  .shop-label{background:#fff;border-radius:9px;padding:3px 8px;font-size:10.5px;font-weight:800;text-align:center;margin-top:5px;box-shadow:0 2px 6px rgba(0,0,0,.15);line-height:1.35;max-width:150px;}
   .tier-stars-label{color:var(--marigold);font-size:9.5px;display:block;}
-  .cap-pill{
-    position:absolute;top:-6px;right:6px;background:#fff;border:2px solid var(--danger);border-radius:999px;
-    padding:1px 6px;font-size:10px;font-weight:800;color:var(--danger);box-shadow:0 2px 4px rgba(0,0,0,.15);z-index:4;
-  }
+  .cap-pill{position:absolute;top:-6px;right:6px;background:#fff;border:2px solid var(--danger);border-radius:999px;padding:1px 6px;font-size:10px;font-weight:800;color:var(--danger);box-shadow:0 2px 4px rgba(0,0,0,.15);z-index:4;}
+  .cap-pill.deco{border-color:var(--teal);color:var(--teal);}
+  .bus-timer-pill{position:absolute;top:-6px;right:6px;background:#fff;border:2px solid var(--saffron);border-radius:999px;padding:1px 6px;font-size:10px;font-weight:800;color:var(--saffron);box-shadow:0 2px 4px rgba(0,0,0,.15);z-index:4;}
 
   .sidewalk-actors{position:absolute;left:0;right:0;bottom:24%;height:190px;pointer-events:none;z-index:3;}
-  .customer{position:absolute;bottom:2px;width:46px;height:66px;transition:left 0.1s linear;animation:walkbob 0.5s ease-in-out infinite alternate;}
+  .customer{position:absolute;bottom:2px;width:46px;height:66px;transition:left 0.1s linear, opacity 0.35s ease, transform 0.35s ease;animation:walkbob 0.5s ease-in-out infinite alternate;}
+  .customer.entered-shop{opacity:0;transform:scale(0.55) translateY(10px);animation:none;}
+  .customer.seated{animation:none;transform:translateY(4px);}
+  .customer.dancing{animation:dance 0.35s ease-in-out infinite alternate;}
   @keyframes walkbob{ from{transform:translateY(0);} to{transform:translateY(-3px);} }
+  @keyframes dance{ from{transform:translateY(0) rotate(-6deg);} to{transform:translateY(-6px) rotate(6deg);} }
   .customer img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3));}
-  .bag-badge{position:absolute;top:-6px;right:-6px;font-size:15px;}
+  .bag-badge, .mood-badge{position:absolute;top:-6px;right:-6px;font-size:15px;}
+  .mood-badge{left:-6px;right:auto;}
+  .patience-bar{position:absolute;top:-10px;left:2px;right:2px;height:5px;background:#e8d9c4;border-radius:4px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.2);}
+  .patience-fill{height:100%;transition:width .1s linear, background-color .3s;}
+
+  .shop-slot.tier-1 .shop-img{filter:drop-shadow(0 5px 5px rgba(0,0,0,0.28)) drop-shadow(0 0 8px rgba(192,192,220,0.8));transform:scale(1.04);}
+  .shop-slot.tier-2 .shop-img{filter:drop-shadow(0 5px 5px rgba(0,0,0,0.28)) drop-shadow(0 0 14px rgba(245,197,24,0.95));transform:scale(1.1);}
+  .tier-badge{position:absolute;top:-6px;left:6px;font-size:15px;z-index:4;filter:drop-shadow(0 1px 2px rgba(0,0,0,.3));}
+  .shop-slot.upgrade-flash .shop-img{animation:upgradeFlash 0.7s ease-out;}
+  @keyframes upgradeFlash{
+    0%{filter:drop-shadow(0 0 0 rgba(245,197,24,0));transform:scale(1);}
+    40%{filter:drop-shadow(0 0 26px rgba(245,197,24,1));transform:scale(1.25);}
+    100%{filter:drop-shadow(0 0 14px rgba(245,197,24,0.95));transform:scale(1.1);}
+  }
+  .sparkle{position:absolute;font-size:20px;animation:sparkleFly 0.8s ease-out forwards;pointer-events:none;z-index:6;}
+  @keyframes sparkleFly{ from{opacity:1;transform:translateY(0) scale(0.6);} to{opacity:0;transform:translateY(-40px) scale(1.3);} }
+
+  .bus-sprite{position:absolute;bottom:20%;width:130px;z-index:5;transition:left 1.6s linear;}
+  .bus-sprite svg{width:100%;filter:drop-shadow(0 4px 4px rgba(0,0,0,.3));}
 
   .road{position:absolute;bottom:0;left:0;right:0;height:24%;z-index:2;}
   .road::before{content:"";position:absolute;top:50%;left:0;right:0;height:3px;background:repeating-linear-gradient(90deg,#fff 0 18px,transparent 18px 34px);opacity:.6;}
   .car{position:absolute;bottom:8px;width:76px;animation:carmove 8s linear infinite;}
   .car img{width:100%;filter:drop-shadow(0 3px 3px rgba(0,0,0,.3));}
   @keyframes carmove{ from{left:-14%;} to{left:110%;} }
+  .street-scene.game-paused .car,
+  .street-scene.game-paused .cloud,
+  .street-scene.game-paused .customer{animation-play-state:paused !important;}
+  .paused-overlay{position:absolute;inset:0;background:rgba(58,38,24,0.35);display:flex;align-items:center;justify-content:center;z-index:20;font-size:22px;font-weight:900;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.5);}
+
+  body.pseudo-fullscreen{position:fixed;inset:0;overflow-y:auto;z-index:9999;background:linear-gradient(160deg,#FFF3DA 0%,#FFE3C2 40%,#FFD3E4 100%);}
+  body.pseudo-fullscreen .container{max-width:100%;padding:10px;}
+  body.pseudo-fullscreen .street-scene{height:calc(100vh - 240px);}
+  body.pseudo-fullscreen .panel-row{display:none;}
+  body.pseudo-fullscreen .footer-note{display:none;}
 
   .panel-row{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap;}
+  body.fullscreen-mode .panel-row{display:none;}
   .panel{background:var(--panel);border-radius:18px;padding:16px;box-shadow:var(--shadow);flex:1;min-width:270px;}
   .panel h3{margin:0 0 6px;font-size:15px;display:flex;align-items:center;gap:6px;}
   .panel h3 img{width:18px;height:18px;object-fit:contain;}
   .panel .hint{font-size:11px;color:#8a6a52;margin-bottom:8px;}
-  .shop-list-item, .deco-list-item{display:flex;justify-content:space-between;align-items:center;padding:8px 6px;border-radius:10px;margin-bottom:4px;font-size:12.5px;}
-  .shop-list-item:hover, .deco-list-item:hover{background:#FFF3E0;}
-  .shop-list-item img.thumb, .deco-list-item img.thumb{width:30px;height:30px;object-fit:contain;margin-right:6px;vertical-align:middle;}
+  .shop-list-item{display:flex;justify-content:space-between;align-items:center;padding:8px 6px;border-radius:10px;margin-bottom:4px;font-size:12.5px;}
+  .shop-list-item:hover{background:#FFF3E0;}
+  .shop-list-item img.thumb{width:30px;height:30px;object-fit:contain;margin-right:6px;vertical-align:middle;}
+  .section-sub{font-size:11px;font-weight:800;color:#B98955;text-transform:uppercase;letter-spacing:.5px;margin:10px 0 4px;}
   .buy-btn{background:var(--teal);color:#fff;border:none;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer;font-size:12px;}
   .buy-btn:disabled{background:#ccc;cursor:not-allowed;}
 
-  .deco-owned-strip{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
-  .deco-chip{background:#FFF3E0;border-radius:10px;padding:4px 6px;box-shadow:0 2px 5px rgba(0,0,0,0.08);}
-  .deco-chip img{width:22px;height:22px;object-fit:contain;display:block;}
-
   .modal-overlay{position:fixed;inset:0;background:rgba(58,38,24,0.55);display:flex;align-items:center;justify-content:center;z-index:100;padding:16px;}
-  .modal{background:#fff;border-radius:18px;padding:20px;max-width:380px;width:100%;box-shadow:0 12px 30px rgba(0,0,0,0.3);}
+  .modal{background:#fff;border-radius:18px;padding:20px;max-width:400px;width:100%;box-shadow:0 12px 30px rgba(0,0,0,0.3);max-height:85vh;overflow-y:auto;}
   .modal.wide{max-width:720px;}
   .modal h3{margin-top:0;}
   .modal .close-x{float:right;cursor:pointer;font-weight:900;font-size:18px;}
-  .modal-btn{width:100%;padding:10px;border:none;border-radius:12px;background:var(--deep-pink);color:#fff;font-weight:700;cursor:pointer;margin-top:8px;font-size:14px;display:flex;align-items:center;gap:8px;justify-content:center;}
-  .modal-btn img{width:28px;height:28px;object-fit:contain;}
+  .modal-btn{width:100%;padding:10px;border:none;border-radius:12px;background:var(--deep-pink);color:#fff;font-weight:700;cursor:pointer;margin-top:8px;font-size:13px;display:flex;align-items:center;gap:8px;justify-content:flex-start;text-align:left;}
+  .modal-btn img{width:32px;height:32px;object-fit:contain;flex-shrink:0;}
   .modal-btn.secondary{background:#eee;color:var(--ink);}
   .modal-btn:disabled{background:#ddd;color:#999;cursor:not-allowed;}
   .stat-line{font-size:12.5px;color:#5a4636;margin:3px 0;}
@@ -149,10 +150,7 @@
   .map-wrap{position:relative;height:520px;background:linear-gradient(160deg,#FFE9C6,#FFD3E4);border-radius:16px;overflow:hidden;}
   .map-node{position:absolute;width:120px;text-align:center;cursor:pointer;transform:translate(-50%,-50%);}
   .map-node.locked{cursor:not-allowed;opacity:0.55;}
-  .map-node .node-circle{
-    width:64px;height:64px;border-radius:50%;margin:0 auto;background:linear-gradient(160deg,var(--gold),var(--saffron));
-    display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(0,0,0,0.25);border:4px solid #fff;
-  }
+  .map-node .node-circle{width:64px;height:64px;border-radius:50%;margin:0 auto;background:linear-gradient(160deg,var(--gold),var(--saffron));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(0,0,0,0.25);border:4px solid #fff;}
   .map-node .node-circle img{width:30px;height:30px;object-fit:contain;}
   .map-node.locked .node-circle{background:linear-gradient(160deg,#bbb,#999);}
   .map-node .node-circle .lock-emoji{font-size:22px;}
@@ -164,6 +162,7 @@
   @keyframes toastin{from{opacity:0;transform:translateX(20px);} to{opacity:1;transform:translateX(0);}}
 
   .footer-note{text-align:center;font-size:12px;color:#8a6a52;margin-top:24px;}
+  body.fullscreen-mode .footer-note{display:none;}
   .note-btn{background:none;border:1px solid #E7C79A;border-radius:999px;padding:6px 14px;cursor:pointer;font-size:12px;color:var(--ink);margin-top:6px;}
   ::-webkit-scrollbar{height:6px;}
   ::-webkit-scrollbar-thumb{background:#E7C79A;border-radius:4px;}
@@ -182,8 +181,11 @@
       <span class="goal-label">Day <span id="dayStat">1</span> Goal: ₹<span id="goalStat">0</span></span>
       <div class="goal-track"><div class="goal-fill" id="goalFill" style="width:0%;"></div></div>
     </div>
+    <div class="stat-pill">😊 <span id="happyStat">—</span></div>
     <div class="stat-pill"><img src="assets/ui/star.png"> <span id="repStat">0</span></div>
     <div class="stat-pill">⏱️ <span id="timerStat">40</span>s</div>
+    <button class="fs-btn" id="fastBtn">⏩ Normal</button>
+    <button class="fs-btn" id="fsBtn">⛶ Fullscreen</button>
   </div>
 </div>
 
@@ -207,24 +209,34 @@
       <img class="skyline-img" id="skylineImg" src="" alt="">
       <span class="cloud" style="left:10%; top:8px;">☁️</span>
       <span class="cloud" style="left:55%; top:22px; animation-delay:-15s;">☁️</span>
-      <div class="shops-row" id="shopsRow"></div>
-      <div class="sidewalk-actors" id="sidewalkActors"></div>
-      <div class="road" id="road"></div>
+      <div class="street-scroll">
+        <div class="street-inner" id="streetInner">
+          <div class="shops-row" id="shopsRow"></div>
+          <div class="sidewalk-actors" id="sidewalkActors"></div>
+          <div class="road" id="road"></div>
+        </div>
+      </div>
     </div>
-
-    <div class="deco-owned-strip" id="decoOwnedStrip"></div>
   </div>
 
   <div class="panel-row">
     <div class="panel">
-      <h3>🏪 Build a Shop</h3>
-      <p class="hint">Order matters! Fast & cheap shops early catch more customers before their money runs out.</p>
+      <h3>🏪 Build on a Slot</h3>
+      <p class="hint">Shops AND street furniture share the same plots — choose wisely. Order matters: fast/cheap shops early, benches to slow crowds down before pricier shops. 🍽️ Chaat Corner holds a big crowd at once — great for absorbing a bus-load before they spread out.</p>
+      <div class="section-sub">Shops</div>
       <div id="shopShopList"></div>
+      <div class="section-sub">Street Furniture</div>
+      <div id="decoShopList"></div>
     </div>
     <div class="panel">
-      <h3>🎨 Street Boosters</h3>
-      <p class="hint">These change customer flow, not just looks.</p>
-      <div id="decoShopList"></div>
+      <h3>🎭 How Street Furniture Works</h3>
+      <div style="font-size:12.5px;line-height:1.7;color:#5a4636;">
+        <b>🪑 Bench</b> — customers actually sit down for a few seconds. Free, but counts toward happiness.<br>
+        <b>📰 Newsstand</b> — customers stop to read, pay a small ₹ amount, counts toward happiness.<br>
+        <b>🎶 Music Ads</b> — customers dance as they walk past. No stop, just joy (and a happiness tick).<br>
+        <b>🚌 Bus Stop</b> — an actual bus drives in on a timer, drops off 3 customers right there, then leaves.<br><br>
+        Get <b>100% of today's customers happy</b> (served by any shop, bench, or newsstand) before the day ends for a big bonus.
+      </div>
     </div>
     <div class="panel">
       <h3><img src="assets/ui/trophy.png"> Achievements</h3>
@@ -247,39 +259,41 @@
 const PLAYER_NAME = "Khushi";
 const STEP = 174;
 const SPAWN_BASE_MS = 1700;
-const DAY_DURATION_S = 40;
+const DAY_DURATION_S = 45;
 const TICK_MS = 100;
+const QUEUE_PATIENCE = 6.0;
 
 /* ============================= DATA ============================= */
 const SHOP_TYPES = {
-  chai:      {name:"Chai Tapri",       emoji:"☕", img:"chai.png",       baseCost:40,  tiers:[{cap:2,dwell:2.0,price:8},{cap:3,dwell:1.6,price:14,upgradeCost:80},{cap:4,dwell:1.3,price:22,upgradeCost:200}]},
-  vadapav:   {name:"Vada Pav Cart",    emoji:"🥪", img:"vadapav.png",    baseCost:70,  tiers:[{cap:2,dwell:2.5,price:14},{cap:3,dwell:2.0,price:24,upgradeCost:140},{cap:4,dwell:1.6,price:38,upgradeCost:320}]},
-  chaat:     {name:"Chaat Corner",     emoji:"🍛", img:"chaat.png",      baseCost:100, tiers:[{cap:2,dwell:3.0,price:18},{cap:3,dwell:2.4,price:30,upgradeCost:180},{cap:4,dwell:2.0,price:48,upgradeCost:380}]},
-  kulfi:     {name:"Kulfi Cart",       emoji:"🍨", img:"kulfi.png",      baseCost:90,  tiers:[{cap:2,dwell:2.2,price:12},{cap:3,dwell:1.8,price:20,upgradeCost:160},{cap:4,dwell:1.5,price:32,upgradeCost:340}]},
-  mithai:    {name:"Mithai Shop",      emoji:"🍬", img:"mithai.png",     baseCost:220, tiers:[{cap:3,dwell:3.5,price:35},{cap:4,dwell:3.0,price:60,upgradeCost:400},{cap:5,dwell:2.5,price:95,upgradeCost:800}]},
-  saree:     {name:"Saree Boutique",   emoji:"🥻", img:"saree.png",      baseCost:350, tiers:[{cap:2,dwell:5.0,price:70},{cap:3,dwell:4.2,price:120,upgradeCost:650},{cap:4,dwell:3.5,price:190,upgradeCost:1300}]},
-  jewel:     {name:"Johari Jewellery", emoji:"💍", img:"jewel.png",      baseCost:600, tiers:[{cap:2,dwell:6.0,price:130},{cap:3,dwell:5.0,price:220,upgradeCost:1100},{cap:3,dwell:4.0,price:340,upgradeCost:2200}]},
-  spice:     {name:"Spice Stall",      emoji:"🌶️", img:"spice.png",      baseCost:160, tiers:[{cap:2,dwell:2.8,price:22},{cap:3,dwell:2.3,price:36,upgradeCost:300},{cap:4,dwell:1.9,price:56,upgradeCost:600}]},
-  handicraft:{name:"Handicraft Shop",  emoji:"🏺", img:"handicraft.png", baseCost:300, tiers:[{cap:2,dwell:4.0,price:45},{cap:3,dwell:3.3,price:75,upgradeCost:550},{cap:4,dwell:2.8,price:115,upgradeCost:1100}]},
-  book:      {name:"Bookstall",        emoji:"📚", img:"book.png",       baseCost:150, tiers:[{cap:2,dwell:3.2,price:20},{cap:3,dwell:2.6,price:34,upgradeCost:280},{cap:4,dwell:2.2,price:54,upgradeCost:560}]},
+  chai:      {name:"Chai Tapri",       emoji:"☕", imgs:["chai.png","chai-t2.png","chai-t3.png"],             baseCost:40,  tiers:[{cap:2,dwell:2.0,price:8},{cap:3,dwell:1.6,price:14,upgradeCost:80},{cap:4,dwell:1.3,price:22,upgradeCost:200}]},
+  vadapav:   {name:"Vada Pav Cart",    emoji:"🥪", imgs:["vadapav.png","vadapav-t2.png","vadapav-t3.png"],    baseCost:70,  tiers:[{cap:2,dwell:2.5,price:14},{cap:3,dwell:2.0,price:24,upgradeCost:140},{cap:4,dwell:1.6,price:38,upgradeCost:320}]},
+  chaat:     {name:"Chaat Corner",     emoji:"🍛", imgs:["chaat.png","chaat-t2.png","chaat-t3.png"],          baseCost:100, holding:true, tiers:[{cap:4,dwell:3.2,price:16},{cap:6,dwell:2.8,price:26,upgradeCost:180},{cap:8,dwell:2.4,price:40,upgradeCost:380}]},
+  kulfi:     {name:"Kulfi Cart",       emoji:"🍨", imgs:["kulfi.png","kulfi-t2.png","kulfi-t3.png"],          baseCost:90,  tiers:[{cap:2,dwell:2.2,price:12},{cap:3,dwell:1.8,price:20,upgradeCost:160},{cap:4,dwell:1.5,price:32,upgradeCost:340}]},
+  mithai:    {name:"Mithai Shop",      emoji:"🍬", imgs:["mithai.png","mithai-t2.png","mithai-t3.png"],       baseCost:220, tiers:[{cap:3,dwell:3.5,price:35},{cap:4,dwell:3.0,price:60,upgradeCost:400},{cap:5,dwell:2.5,price:95,upgradeCost:800}]},
+  saree:     {name:"Saree Boutique",   emoji:"🥻", imgs:["saree.png","saree-t2.png","saree-t3.png"],          baseCost:350, tiers:[{cap:2,dwell:5.0,price:70},{cap:3,dwell:4.2,price:120,upgradeCost:650},{cap:4,dwell:3.5,price:190,upgradeCost:1300}]},
+  jewel:     {name:"Johari Jewellery", emoji:"💍", imgs:["jewel.png","jewel-t2.png","jewel-t3.png"],          baseCost:600, tiers:[{cap:2,dwell:6.0,price:130},{cap:3,dwell:5.0,price:220,upgradeCost:1100},{cap:3,dwell:4.0,price:340,upgradeCost:2200}]},
+  spice:     {name:"Spice Stall",      emoji:"🌶️", imgs:["spice.png","spice-t2.png","spice-t3.png"],          baseCost:160, tiers:[{cap:2,dwell:2.8,price:22},{cap:3,dwell:2.3,price:36,upgradeCost:300},{cap:4,dwell:1.9,price:56,upgradeCost:600}]},
+  handicraft:{name:"Handicraft Shop",  emoji:"🏺", imgs:["handicraft.png","handicraft-t2.png","handicraft-t3.png"], baseCost:300, tiers:[{cap:2,dwell:4.0,price:45},{cap:3,dwell:3.3,price:75,upgradeCost:550},{cap:4,dwell:2.8,price:115,upgradeCost:1100}]},
+  book:      {name:"Bookstall",        emoji:"📚", imgs:["book.png","book-t2.png","book-t3.png"],             baseCost:150, tiers:[{cap:2,dwell:3.2,price:20},{cap:3,dwell:2.6,price:34,upgradeCost:280},{cap:4,dwell:2.2,price:54,upgradeCost:560}]},
 };
 
+// kind: 'seat' = customer stops & dwells (like a shop but usually free/cheap); 'pass' = customer keeps walking but gets a visible reaction; 'bus' = spawns customers on a timer
 const DECORATIONS = {
-  bench:    {name:"Street Bench",       img:"bench.png",     cost:70,  desc:"-8% customer walking speed (they linger longer)", effect:{speedPct:-0.08}, maxStack:3},
-  newsstand:{name:"Newsstand",          img:"newsstand.png", cost:90,  desc:"-6% speed + small passive income", effect:{speedPct:-0.06, idleIncome:1.5}, maxStack:3},
-  music:    {name:"Music Ads",          img:"music.png",     cost:150, desc:"+20% customer spawn rate", effect:{spawnPct:0.20}, maxStack:3},
-  busstop:  {name:"Bus Stop",           img:"busstop.png",   cost:300, desc:"Every 9s, a busload of 3 customers arrives", effect:{burst:true}, maxStack:1},
-  rangoli:  {name:"Rangoli Mat",        img:"rangoli.png",   cost:80,  desc:"+10% customer spawn rate", effect:{spawnPct:0.10}, maxStack:2},
-  diya:     {name:"Diya Lights",        img:"diya.png",      cost:120, desc:"-5% speed, feels festive", effect:{speedPct:-0.05}, maxStack:2},
+  bench:    {name:"Street Bench", img:"bench.png",     baseCost:70,  kind:'seat', cap:2, dwell:3.0, income:0, emoji:"🪑"},
+  newsstand:{name:"Newsstand",    img:"newsstand.png", baseCost:90,  kind:'seat', cap:1, dwell:2.5, income:5, emoji:"📰"},
+  music:    {name:"Music Ads",    img:"music.png",     baseCost:150, kind:'pass', emoji:"🎶"},
+  rangoli:  {name:"Rangoli Mat",  img:"rangoli.png",   baseCost:80,  kind:'pass', emoji:"🎨"},
+  diya:     {name:"Diya Lights",  img:"diya.png",      baseCost:120, kind:'pass', emoji:"🪔"},
+  busstop:  {name:"Bus Stop",     img:"busstop.png",   baseCost:300, kind:'bus',  busInterval:13, emoji:"🚌"},
 };
 
 const CITIES = [
-  {id:"mumbai",  name:"Mumbai Chowpatty Lane", desc:"Where every dream in the bazaar business begins.", unlockRep:0,    slots:6, shops:["chai","vadapav","chaat","kulfi"], moneyRange:[40,90],   mapPos:[14,78]},
-  {id:"delhi",   name:"Delhi Chandni Chowk",   desc:"Glittering lanes of silk and spice.",              unlockRep:600,  slots:7, shops:["saree","jewel","mithai","spice","chai"], moneyRange:[70,150], mapPos:[32,55]},
-  {id:"jaipur",  name:"Jaipur Johari Bazaar",  desc:"The Pink City's jewel of jewel-markets.",           unlockRep:1500, slots:7, shops:["jewel","handicraft","saree","chai"], moneyRange:[90,190], mapPos:[55,68]},
-  {id:"kolkata", name:"Kolkata College Street",desc:"Books, sweets, and adda over cutting chai.",        unlockRep:2800, slots:7, shops:["book","mithai","chai","chaat"], moneyRange:[60,130],  mapPos:[70,40]},
-  {id:"kochi",   name:"Kochi Spice Market",    desc:"The scent of cardamom drifts down the backwaters.", unlockRep:4500, slots:8, shops:["spice","handicraft","kulfi","vadapav"], moneyRange:[80,170], mapPos:[50,20]},
-  {id:"goa",     name:"Goa Night Market",      desc:"The grand finale — every stall, every flavour.",    unlockRep:7000, slots:9, shops:Object.keys(SHOP_TYPES), moneyRange:[120,260], mapPos:[80,12]},
+  {id:"mumbai",  name:"Mumbai Chowpatty Lane", desc:"Where every dream in the bazaar business begins.", unlockRep:0,    slots:7, shops:["chai","vadapav","chaat","kulfi"], moneyRange:[40,90],   mapPos:[14,78]},
+  {id:"delhi",   name:"Delhi Chandni Chowk",   desc:"Glittering lanes of silk and spice.",              unlockRep:600,  slots:8, shops:["saree","jewel","mithai","spice","chai"], moneyRange:[70,150], mapPos:[32,55]},
+  {id:"jaipur",  name:"Jaipur Johari Bazaar",  desc:"The Pink City's jewel of jewel-markets.",           unlockRep:1500, slots:8, shops:["jewel","handicraft","saree","chai"], moneyRange:[90,190], mapPos:[55,68]},
+  {id:"kolkata", name:"Kolkata College Street",desc:"Books, sweets, and adda over cutting chai.",        unlockRep:2800, slots:8, shops:["book","mithai","chai","chaat"], moneyRange:[60,130],  mapPos:[70,40]},
+  {id:"kochi",   name:"Kochi Spice Market",    desc:"The scent of cardamom drifts down the backwaters.", unlockRep:4500, slots:9, shops:["spice","handicraft","kulfi","vadapav"], moneyRange:[80,170], mapPos:[50,20]},
+  {id:"goa",     name:"Goa Night Market",      desc:"The grand finale — every stall, every flavour.",    unlockRep:7000, slots:10, shops:Object.keys(SHOP_TYPES), moneyRange:[120,260], mapPos:[80,12]},
 ];
 
 const FESTIVALS = [
@@ -289,8 +303,9 @@ const FESTIVALS = [
 ];
 
 const ACHIEVEMENTS = [
-  {id:"first_shop", label:"First Dukaan!", test:s=>Object.values(s.cities).some(c=>c.slots.some(p=>p)) },
+  {id:"first_shop", label:"First Dukaan!", test:s=>Object.values(s.cities).some(c=>c.slots.some(p=>p&&p.type==='shop')) },
   {id:"first_perfect", label:"First Perfect Day (goal hit!)", test:s=>s.perfectDays>=1 },
+  {id:"first_happy", label:"First 100% Happy Day!", test:s=>s.happyDays>=1 },
   {id:"rich_5000",  label:"₹5,000 earned lifetime", test:s=>s.lifetimeEarned>=5000 },
   {id:"rich_25000", label:"₹25,000 earned lifetime", test:s=>s.lifetimeEarned>=25000 },
   {id:"rep_1000",   label:"1,000 reputation", test:s=>s.reputation>=1000 },
@@ -302,7 +317,7 @@ const ACHIEVEMENTS = [
 const CUSTOMER_COUNT = 7;
 
 /* ============================= STORAGE ============================= */
-const SAVE_KEY = "dukaan_dreams_save_v4";
+const SAVE_KEY = "dukaan_dreams_save_v5";
 const MemStore = {};
 function storageSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){ MemStore[k]=v; } }
 function storageGet(k){ try{ return localStorage.getItem(k); }catch(e){ return MemStore[k]||null; } }
@@ -310,14 +325,15 @@ function storageGet(k){ try{ return localStorage.getItem(k); }catch(e){ return M
 /* ============================= STATE ============================= */
 function freshState(){
   const cities = {};
-  CITIES.forEach(c=>{ cities[c.id] = { slots:new Array(c.slots).fill(null), decos:{} }; });
+  CITIES.forEach(c=>{ cities[c.id] = { slots:new Array(c.slots).fill(null) }; });
   return {
     money:150, reputation:0, day:1, dayCash:0, dayGoal: computeGoal(1,0),
-    perfectDays:0, perfectStreak:0, lifetimeEarned:0, festivalsHosted:0,
+    dayCustomersTotal:0, dayCustomersHappy:0,
+    perfectDays:0, happyDays:0, perfectStreak:0, lifetimeEarned:0, festivalsHosted:0,
     currentCity:"mumbai", activeFestival:null, festivalCooldowns:{}, unlockedAch:[], cities
   };
 }
-function computeGoal(day, cityIdx){ return Math.round(120 + (day-1)*22 + cityIdx*80); }
+function computeGoal(day, cityIdx){ return Math.round(130 + (day-1)*27 + cityIdx*100); }
 
 let state = loadState();
 function loadState(){
@@ -331,19 +347,20 @@ function loadState(){
       if(parsed.cities[c.id].slots.length < c.slots){
         while(parsed.cities[c.id].slots.length < c.slots) parsed.cities[c.id].slots.push(null);
       }
-      if(!parsed.cities[c.id].decos) parsed.cities[c.id].decos = {};
     });
+    if(parsed.dayCustomersTotal===undefined){ parsed.dayCustomersTotal=0; parsed.dayCustomersHappy=0; parsed.happyDays=0; }
     return Object.assign(fresh, parsed);
   }catch(e){ return freshState(); }
 }
 function saveState(){ storageSet(SAVE_KEY, JSON.stringify(state)); }
 
 let customers = [];
+let buses = [];
 let custIdSeq = 1;
+let busIdSeq = 1;
 let paused = false;
 let dayTimer = DAY_DURATION_S;
 let spawnAcc = 0;
-let burstAcc = 0;
 
 /* ============================= HELPERS ============================= */
 function cityDef(id){ return CITIES.find(c=>c.id===id); }
@@ -351,27 +368,13 @@ function cityIndex(id){ return CITIES.findIndex(c=>c.id===id); }
 function currentCityDef(){ return cityDef(state.currentCity); }
 function currentCityState(){ return state.cities[state.currentCity]; }
 function fmt(n){ return Math.round(n).toLocaleString('en-IN'); }
+function slotCenterX(idx){ return idx*STEP + STEP/2 + 14; }
 
 function isFestivalActiveFor(shopId){
   if(!state.activeFestival) return null;
   const fest = FESTIVALS.find(f=>f.id===state.activeFestival.id);
   if(fest && fest.boost.includes(shopId)) return fest;
   return null;
-}
-
-function cityModifiers(){
-  const decos = currentCityState().decos;
-  let speedPct = 0, spawnPct = 0, idleIncome = 0, hasBurst=false;
-  Object.entries(decos).forEach(([id,count])=>{
-    const d = DECORATIONS[id];
-    if(!d || !count) return;
-    if(d.effect.speedPct) speedPct += d.effect.speedPct*count;
-    if(d.effect.spawnPct) spawnPct += d.effect.spawnPct*count;
-    if(d.effect.idleIncome) idleIncome += d.effect.idleIncome*count;
-    if(d.effect.burst) hasBurst = true;
-  });
-  speedPct = Math.max(speedPct, -0.5);
-  return {speedPct, spawnPct, idleIncome, hasBurst};
 }
 
 function toast(msg){
@@ -392,7 +395,7 @@ function checkAchievements(){
   });
 }
 
-/* ============================= EMPTY LOT SVG (no photo asset for this) ============================= */
+/* ============================= EMPTY LOT SVG ============================= */
 function emptyLotSVG(slotNum){
   return `<svg viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg">
     <rect x="6" y="112" width="108" height="30" fill="#E9C98F"/>
@@ -411,6 +414,22 @@ function emptyLotSVG(slotNum){
   </svg>`;
 }
 
+function busSVG(){
+  return `<svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="8" width="88" height="30" rx="8" fill="#FFB627" stroke="#3A2618" stroke-width="1.5"/>
+    <rect x="10" y="14" width="15" height="12" rx="2" fill="#BEE7F5" stroke="#3A2618" stroke-width="1.5"/>
+    <rect x="29" y="14" width="15" height="12" rx="2" fill="#BEE7F5" stroke="#3A2618" stroke-width="1.5"/>
+    <rect x="48" y="14" width="15" height="12" rx="2" fill="#BEE7F5" stroke="#3A2618" stroke-width="1.5"/>
+    <rect x="67" y="14" width="19" height="12" rx="2" fill="#BEE7F5" stroke="#3A2618" stroke-width="1.5"/>
+    <rect x="4" y="30" width="88" height="8" fill="#D9534F"/>
+    <circle cx="22" cy="42" r="7" fill="#2b2b2b"/>
+    <circle cx="74" cy="42" r="7" fill="#2b2b2b"/>
+    <circle cx="22" cy="42" r="3" fill="#888"/>
+    <circle cx="74" cy="42" r="3" fill="#888"/>
+    <text x="48" y="10" font-size="7" text-anchor="middle" fill="#3A2618" font-weight="800">BUS</text>
+  </svg>`;
+}
+
 /* ============================= RENDER ============================= */
 function render(){
   document.getElementById('subtitle').textContent = PLAYER_NAME + "'s Bazaar Empire";
@@ -420,6 +439,7 @@ function render(){
   document.getElementById('goalStat').textContent = fmt(state.dayGoal);
   document.getElementById('timerStat').textContent = Math.ceil(dayTimer);
   document.getElementById('goalFill').style.width = Math.min(100, state.dayCash/state.dayGoal*100)+'%';
+  document.getElementById('happyStat').textContent = state.dayCustomersTotal>0 ? Math.round(state.dayCustomersHappy/state.dayCustomersTotal*100)+'%' : '—';
 
   renderFestivalBanner();
   renderCityTabs();
@@ -427,8 +447,6 @@ function render(){
   renderRoad();
   renderShopsRow();
   renderShopList();
-  renderDecoList();
-  renderDecoOwnedStrip();
   renderAchievements();
 }
 
@@ -462,7 +480,7 @@ function renderCityTabs(){
     const unlocked = state.reputation >= c.unlockRep;
     const div = document.createElement('div');
     div.className = 'city-tab' + (c.id===state.currentCity?' active':'') + (!unlocked?' locked':'');
-    div.innerHTML = `${c.name}<small>${unlocked? (c.slots+' shop slots') : ('🔒 needs ⭐'+fmt(c.unlockRep))}</small>`;
+    div.innerHTML = `${c.name}<small>${unlocked? (c.slots+' plots') : ('🔒 needs ⭐'+fmt(c.unlockRep))}</small>`;
     if(unlocked){ div.onclick = ()=>{ switchCity(c.id); }; }
     wrap.appendChild(div);
   });
@@ -470,7 +488,7 @@ function renderCityTabs(){
 
 function switchCity(id){
   state.currentCity = id;
-  customers = [];
+  customers = []; buses = [];
   document.getElementById('sidewalkActors').innerHTML = '';
   state.dayGoal = computeGoal(state.day, cityIndex(id));
   render();
@@ -502,21 +520,34 @@ function renderShopsRow(){
   const cs = currentCityState();
   document.getElementById('cityName').textContent = cdef.name;
   document.getElementById('cityDesc').textContent = cdef.desc;
+  document.getElementById('streetInner').style.width = (cs.slots.length*STEP + 100)+'px';
 
   const row = document.getElementById('shopsRow');
   row.innerHTML = '';
   cs.slots.forEach((placed, idx)=>{
     const slot = document.createElement('div');
     slot.className = 'shop-slot';
-    if(placed){
+    if(placed && placed.type==='shop'){
       const type = SHOP_TYPES[placed.shopId];
       const tierInfo = type.tiers[placed.tier];
       const occ = placed.occupancy||0;
       const stars = '★'.repeat(placed.tier+1)+'☆'.repeat(type.tiers.length-1-placed.tier);
+      const medals = ['🥉','🥈','🥇'];
+      slot.className = 'shop-slot tier-'+placed.tier;
       slot.innerHTML = `<div class="cap-pill">${occ}/${tierInfo.cap}</div>
-        <img class="shop-img" src="assets/shops/${type.img}" alt="${type.name}">
+        <span class="tier-badge">${medals[placed.tier]}</span>
+        <img class="shop-img" src="assets/shops/${type.imgs[placed.tier]}" alt="${type.name}">
         <div class="shop-label">${type.name}<span class="tier-stars-label">${stars}</span></div>`;
       slot.onclick = ()=>openShopModal(idx);
+    } else if(placed && placed.type==='deco'){
+      const d = DECORATIONS[placed.decoId];
+      let badge = '';
+      if(d.kind==='seat') badge = `<div class="cap-pill deco">${placed.occupancy||0}/${d.cap}</div>`;
+      if(d.kind==='bus') badge = `<div class="bus-timer-pill">🚌 ${Math.ceil(placed.busTimer)}s</div>`;
+      slot.innerHTML = `${badge}
+        <img class="shop-img" src="assets/decorations/${d.img}" alt="${d.name}">
+        <div class="shop-label">${d.emoji} ${d.name}</div>`;
+      slot.onclick = ()=>openDecoInfoModal(idx);
     } else {
       slot.innerHTML = emptyLotSVG(idx+1);
       slot.onclick = ()=>openBuildModal(idx);
@@ -527,62 +558,45 @@ function renderShopsRow(){
 
 function renderShopList(){
   const cdef = currentCityDef();
-  const wrap = document.getElementById('shopShopList');
-  wrap.innerHTML = '';
+  const shopWrap = document.getElementById('shopShopList');
+  shopWrap.innerHTML = '';
   cdef.shops.forEach(shopId=>{
     const type = SHOP_TYPES[shopId];
     const row = document.createElement('div');
     row.className = 'shop-list-item';
-    row.innerHTML = `<span><img class="thumb" src="assets/shops/${type.img}"> ${type.name} <br><small>₹${fmt(type.baseCost)} · cap ${type.tiers[0].cap} · ₹${type.tiers[0].price}/visit</small></span>`;
+    row.innerHTML = `<span><img class="thumb" src="assets/shops/${type.imgs[0]}"> ${type.name}${type.holding?' 🍽️':''} <br><small>₹${fmt(type.baseCost)} · cap ${type.tiers[0].cap} · ₹${type.tiers[0].price}/visit${type.holding?' · holds a big crowd!':''}</small></span>`;
     const btn = document.createElement('button');
-    btn.className='buy-btn';
-    btn.textContent='Build';
+    btn.className='buy-btn'; btn.textContent='Build';
     const hasSlot = currentCityState().slots.includes(null);
     btn.disabled = state.money < type.baseCost || !hasSlot;
     btn.onclick = ()=>{
       const emptyIdx = currentCityState().slots.findIndex(p=>p===null);
-      if(emptyIdx===-1){ toast("No empty slots left here!"); return; }
+      if(emptyIdx===-1){ toast("No empty plots left here!"); return; }
       buildShop(emptyIdx, shopId);
     };
     row.appendChild(btn);
-    wrap.appendChild(row);
+    shopWrap.appendChild(row);
   });
-}
 
-function renderDecoList(){
-  const wrap = document.getElementById('decoShopList');
-  wrap.innerHTML = '';
-  const owned = currentCityState().decos;
+  const decoWrap = document.getElementById('decoShopList');
+  decoWrap.innerHTML = '';
   Object.entries(DECORATIONS).forEach(([id,d])=>{
-    const count = owned[id]||0;
     const row = document.createElement('div');
-    row.className = 'deco-list-item';
-    row.innerHTML = `<span><img class="thumb" src="assets/decorations/${d.img}"> ${d.name} ${count?('x'+count):''}<br><small>₹${fmt(d.cost)} · ${d.desc}</small></span>`;
+    row.className = 'shop-list-item';
+    const descBit = d.kind==='seat' ? `cap ${d.cap} · ${d.dwell}s${d.income?(' · +₹'+d.income):''}` : d.kind==='bus' ? `bus every ${d.busInterval}s` : 'customers dance as they pass';
+    row.innerHTML = `<span><img class="thumb" src="assets/decorations/${d.img}"> ${d.name} <br><small>₹${fmt(d.baseCost)} · ${descBit}</small></span>`;
     const btn = document.createElement('button');
-    btn.className='buy-btn';
-    btn.textContent='Buy';
-    btn.disabled = state.money < d.cost || count>=d.maxStack;
+    btn.className='buy-btn'; btn.textContent='Build';
+    const hasSlot = currentCityState().slots.includes(null);
+    btn.disabled = state.money < d.baseCost || !hasSlot;
     btn.onclick = ()=>{
-      if(state.money < d.cost || count>=d.maxStack) return;
-      state.money -= d.cost;
-      owned[id] = count+1;
-      toast(`Placed ${d.name}!`);
-      checkAchievements();
-      saveState(); render();
+      const emptyIdx = currentCityState().slots.findIndex(p=>p===null);
+      if(emptyIdx===-1){ toast("No empty plots left here!"); return; }
+      buildDeco(emptyIdx, id);
     };
     row.appendChild(btn);
-    wrap.appendChild(row);
+    decoWrap.appendChild(row);
   });
-}
-
-function renderDecoOwnedStrip(){
-  const owned = currentCityState().decos;
-  const wrap = document.getElementById('decoOwnedStrip');
-  let html = '';
-  Object.entries(owned).forEach(([id,count])=>{
-    if(count>0){ for(let i=0;i<count;i++) html += `<span class="deco-chip" title="${DECORATIONS[id].name}"><img src="assets/decorations/${DECORATIONS[id].img}"></span>`; }
-  });
-  wrap.innerHTML = html;
 }
 
 function renderAchievements(){
@@ -598,23 +612,43 @@ function buildShop(idx, shopId){
   const type = SHOP_TYPES[shopId];
   if(state.money < type.baseCost) return;
   state.money -= type.baseCost;
-  currentCityState().slots[idx] = {shopId, tier:0, occupancy:0};
+  currentCityState().slots[idx] = {type:'shop', shopId, tier:0, occupancy:0};
   toast(`Opened a new ${type.name}! ${type.emoji}`);
+  checkAchievements();
+  saveState(); render();
+}
+
+function buildDeco(idx, decoId){
+  const d = DECORATIONS[decoId];
+  if(state.money < d.baseCost) return;
+  state.money -= d.baseCost;
+  const obj = {type:'deco', decoId, occupancy:0};
+  if(d.kind==='bus') obj.busTimer = d.busInterval;
+  currentCityState().slots[idx] = obj;
+  toast(`Placed ${d.name}! ${d.emoji}`);
   checkAchievements();
   saveState(); render();
 }
 
 function openBuildModal(idx){
   const cdef = currentCityDef();
-  const options = cdef.shops.map(shopId=>{
+  let options = cdef.shops.map(shopId=>{
     const t = SHOP_TYPES[shopId];
     const affordable = state.money >= t.baseCost;
     return `<button class="modal-btn ${affordable?'':'secondary'}" ${affordable?'':'disabled'} onclick="buildShop(${idx},'${shopId}');closeModal();">
-      <img src="assets/shops/${t.img}"> ${t.name} — ₹${fmt(t.baseCost)} <small>(cap ${t.tiers[0].cap}, ₹${t.tiers[0].price}/visit)</small>
+      <img src="assets/shops/${t.imgs[0]}"> <span>${t.name} — ₹${fmt(t.baseCost)}<br><small>cap ${t.tiers[0].cap}, ₹${t.tiers[0].price}/visit</small></span>
+    </button>`;
+  }).join('');
+  options += `<div class="section-sub">Street Furniture</div>`;
+  options += Object.entries(DECORATIONS).map(([id,d])=>{
+    const affordable = state.money >= d.baseCost;
+    const descBit = d.kind==='seat' ? `cap ${d.cap}, free to sit${d.income?(', +₹'+d.income+' newsstand fee'):''}` : d.kind==='bus' ? `spawns 3 customers every ${d.busInterval}s` : 'customers dance as they pass, no stop';
+    return `<button class="modal-btn ${affordable?'':'secondary'}" ${affordable?'':'disabled'} onclick="buildDeco(${idx},'${id}');closeModal();">
+      <img src="assets/decorations/${d.img}"> <span>${d.name} — ₹${fmt(d.baseCost)}<br><small>${descBit}</small></span>
     </button>`;
   }).join('');
   showModal(`<h3><span class="close-x" onclick="closeModal()">✕</span>Build on Slot ${idx+1}</h3>
-    <p style="font-size:13px;color:#7a5c47;">Tip: place fast, cheap shops toward the start of the street so more customers still have money left when they reach your pricier ones later.</p>
+    <p style="font-size:12.5px;color:#7a5c47;">Tip: cheap fast shops early, benches/newsstands to slow the crowd down before your pricier shops later.</p>
     ${options}`);
 }
 
@@ -633,7 +667,18 @@ function openShopModal(idx){
   } else {
     html += `<p style="font-size:12px;color:#7a5c47;">🌟 Maxed out! This shop is at its best.</p>`;
   }
-  html += `<button class="modal-btn secondary" onclick="sellShop(${idx});closeModal();">Sell shop (refund 50%)</button>`;
+  html += `<button class="modal-btn secondary" onclick="sellSlot(${idx});closeModal();">Sell shop (refund 50%)</button>`;
+  showModal(html);
+}
+
+function openDecoInfoModal(idx){
+  const placed = currentCityState().slots[idx];
+  const d = DECORATIONS[placed.decoId];
+  let html = `<h3><span class="close-x" onclick="closeModal()">✕</span>${d.emoji} ${d.name}</h3>`;
+  if(d.kind==='seat') html += `<p class="stat-line">Customers sit for ${d.dwell}s. Capacity ${d.cap}.${d.income?(' Pays ₹'+d.income+' per visit.'):' Free — pure happiness.'}</p>`;
+  if(d.kind==='pass') html += `<p class="stat-line">Every customer who walks past dances for a moment and counts toward today's happiness — no stop needed.</p>`;
+  if(d.kind==='bus') html += `<p class="stat-line">A bus arrives here every ${d.busInterval}s and drops off 3 fresh customers right at this spot.</p>`;
+  html += `<button class="modal-btn secondary" onclick="sellSlot(${idx});closeModal();">Remove (refund 50%)</button>`;
   showModal(html);
 }
 
@@ -647,16 +692,44 @@ function upgradeShop(idx){
   toast(`${type.name} upgraded to tier ${placed.tier+1}! ⭐`);
   checkAchievements();
   saveState(); render();
+  playUpgradeFX(idx);
 }
 
-function sellShop(idx){
+function playUpgradeFX(idx){
+  const row = document.getElementById('shopsRow');
+  const slotEl = row.children[idx];
+  if(!slotEl) return;
+  slotEl.classList.add('upgrade-flash');
+  setTimeout(()=> slotEl.classList.remove('upgrade-flash'), 700);
+  const sparkleEmojis = ['✨','⭐','🌟'];
+  for(let i=0;i<5;i++){
+    const s = document.createElement('span');
+    s.className = 'sparkle';
+    s.textContent = sparkleEmojis[i%sparkleEmojis.length];
+    s.style.left = (20+Math.random()*110)+'px';
+    s.style.top = (60+Math.random()*40)+'px';
+    s.style.animationDelay = (i*0.06)+'s';
+    slotEl.appendChild(s);
+    setTimeout(()=> s.remove(), 900);
+  }
+}
+
+function sellSlot(idx){
   const placed = currentCityState().slots[idx];
-  const type = SHOP_TYPES[placed.shopId];
-  let refund = type.baseCost*0.5;
-  for(let i=1;i<=placed.tier;i++) refund += type.tiers[i].upgradeCost*0.5;
+  let refund, name;
+  if(placed.type==='shop'){
+    const type = SHOP_TYPES[placed.shopId];
+    refund = type.baseCost*0.5;
+    for(let i=1;i<=placed.tier;i++) refund += type.tiers[i].upgradeCost*0.5;
+    name = type.name;
+  } else {
+    const d = DECORATIONS[placed.decoId];
+    refund = d.baseCost*0.5;
+    name = d.name;
+  }
   state.money += refund;
   currentCityState().slots[idx] = null;
-  toast(`Sold ${type.name} for ₹${fmt(refund)}`);
+  toast(`Sold ${name} for ₹${fmt(refund)}`);
   saveState(); render();
 }
 
@@ -670,76 +743,150 @@ function startFestival(festId){
 }
 
 /* ============================= SIMULATION ============================= */
-function spawnCustomer(){
+function spawnCustomer(startX){
   const cdef = currentCityDef();
   const [lo,hi] = cdef.moneyRange;
   customers.push({
-    id: custIdSeq++, x: -20,
+    id: custIdSeq++, x: startX!==undefined?startX:-20,
     money: Math.round(lo + Math.random()*(hi-lo)),
     state: 'walking', slotIndex: null, dwellRemaining: 0, visited: new Set(),
     variant: Math.floor(Math.random()*CUSTOMER_COUNT),
-    boughtSomething:false
+    boughtSomething:false, happy:false, dancing:false
   });
+  state.dayCustomersTotal += 1;
+}
+
+function markHappy(c){
+  if(!c.happy){ c.happy = true; state.dayCustomersHappy += 1; }
+}
+
+function launchBus(slotIdx){
+  const targetX = slotCenterX(slotIdx) - 60;
+  buses.push({id:busIdSeq++, slotIdx, x:-140, targetX, phase:'arriving', pauseT:1.4});
 }
 
 function simTick(dtSec){
-  const mods = cityModifiers();
   const cs = currentCityState();
-  const baseSpeed = 55;
-  const speed = baseSpeed * (1+mods.speedPct);
+  const speed = 55;
 
   spawnAcc += dtSec*1000;
-  const interval = SPAWN_BASE_MS / (1+mods.spawnPct);
-  if(spawnAcc >= interval){
+  const spawnInterval = SPAWN_BASE_MS / (1 + cityIndex(state.currentCity)*0.15);
+  if(spawnAcc >= spawnInterval){
     spawnAcc = 0;
     if(Math.random() < 0.85) spawnCustomer();
-  }
-  if(mods.hasBurst){
-    burstAcc += dtSec*1000;
-    if(burstAcc >= 9000){
-      burstAcc = 0;
-      spawnCustomer(); spawnCustomer(); spawnCustomer();
-      toast("🚌 A busload of customers arrived!");
-    }
-  }
-
-  if(mods.idleIncome>0){
-    const gain = mods.idleIncome*dtSec;
-    state.money += gain; state.dayCash += gain; state.lifetimeEarned += gain;
   }
 
   const streetWidthPx = cs.slots.length*STEP + 80;
 
+  // bus stop timers
+  cs.slots.forEach((placed, idx)=>{
+    if(placed && placed.type==='deco' && placed.decoId==='busstop'){
+      placed.busTimer -= dtSec;
+      if(placed.busTimer<=0){
+        placed.busTimer = DECORATIONS.busstop.busInterval;
+        launchBus(idx);
+      }
+    }
+  });
+
+  // buses
+  buses.forEach(b=>{
+    if(b.phase==='arriving'){
+      b.x += speed*1.4*dtSec;
+      if(b.x >= b.targetX){ b.x = b.targetX; b.phase='paused'; }
+    } else if(b.phase==='paused'){
+      b.pauseT -= dtSec;
+      if(b.pauseT<=0){
+        spawnCustomer(slotCenterX(b.slotIdx));
+        spawnCustomer(slotCenterX(b.slotIdx)-14);
+        spawnCustomer(slotCenterX(b.slotIdx)+14);
+        toast('🚌 A busload of customers arrived!');
+        b.phase='leaving';
+      }
+    } else if(b.phase==='leaving'){
+      b.x += speed*1.4*dtSec;
+    }
+  });
+  buses = buses.filter(b=> b.x < streetWidthPx+140);
+
   customers.forEach(c=>{
+    c.dancing = false;
     if(c.state==='walking'){
       c.x += speed*dtSec;
-      const slotIdx = Math.floor(c.x/STEP);
+      const slotIdx = Math.floor((c.x-14)/STEP);
       if(slotIdx>=0 && slotIdx<cs.slots.length){
         const placed = cs.slots[slotIdx];
-        if(placed && !c.visited.has(slotIdx) && c.money>0){
-          const type = SHOP_TYPES[placed.shopId];
-          const tierInfo = type.tiers[placed.tier];
-          if((placed.occupancy||0) < tierInfo.cap){
-            placed.occupancy = (placed.occupancy||0)+1;
-            c.state = 'inshop'; c.slotIndex = slotIdx;
-            c.dwellRemaining = tierInfo.dwell; c.visited.add(slotIdx);
+        if(placed && !c.visited.has(slotIdx)){
+          if(placed.type==='shop' && c.money>0){
+            const type = SHOP_TYPES[placed.shopId];
+            const tierInfo = type.tiers[placed.tier];
+            if((placed.occupancy||0) < tierInfo.cap){
+              placed.occupancy = (placed.occupancy||0)+1;
+              c.state = 'busy'; c.slotIndex = slotIdx;
+              c.dwellRemaining = tierInfo.dwell; c.visited.add(slotIdx);
+            } else {
+              startQueue(c, slotIdx);
+            }
+          } else if(placed.type==='deco'){
+            const d = DECORATIONS[placed.decoId];
+            if(d.kind==='seat'){
+              if((placed.occupancy||0) < d.cap){
+                placed.occupancy = (placed.occupancy||0)+1;
+                c.state = 'busy'; c.slotIndex = slotIdx;
+                c.dwellRemaining = d.dwell; c.visited.add(slotIdx);
+              } else {
+                startQueue(c, slotIdx);
+              }
+            } else if(d.kind==='pass'){
+              c.visited.add(slotIdx);
+              c.dancing = true;
+              markHappy(c);
+            }
           }
         }
       }
-    } else if(c.state==='inshop'){
+    } else if(c.state==='queuing'){
+      const placed = cs.slots[c.queueSlot];
+      const capInfo = placed.type==='shop' ? SHOP_TYPES[placed.shopId].tiers[placed.tier] : DECORATIONS[placed.decoId];
+      if(placed && (placed.occupancy||0) < capInfo.cap){
+        placed.occupancy = (placed.occupancy||0)+1;
+        c.state = 'busy'; c.slotIndex = c.queueSlot;
+        c.dwellRemaining = capInfo.dwell; c.visited.add(c.queueSlot);
+      } else {
+        c.patience -= dtSec;
+        if(c.patience <= 0){
+          c.visited.add(c.queueSlot);
+          c.state = 'walking';
+          c.x = (c.queueSlot+1)*STEP + 14;
+        }
+      }
+    } else if(c.state==='busy'){
       c.dwellRemaining -= dtSec;
       if(c.dwellRemaining<=0){
         const placed = cs.slots[c.slotIndex];
         if(placed){
-          const type = SHOP_TYPES[placed.shopId];
-          const tierInfo = type.tiers[placed.tier];
-          const fest = isFestivalActiveFor(placed.shopId);
-          const mult = fest?fest.mult:1;
-          const pay = Math.min(c.money, tierInfo.price*mult);
-          c.money -= pay;
-          state.money += pay; state.dayCash += pay; state.lifetimeEarned += pay;
-          placed.occupancy = Math.max(0,(placed.occupancy||0)-1);
-          c.boughtSomething = true;
+          if(placed.type==='shop'){
+            const type = SHOP_TYPES[placed.shopId];
+            const tierInfo = type.tiers[placed.tier];
+            const fest = isFestivalActiveFor(placed.shopId);
+            const mult = fest?fest.mult:1;
+            const pay = Math.min(c.money, tierInfo.price*mult);
+            c.money -= pay;
+            state.money += pay; state.dayCash += pay; state.lifetimeEarned += pay;
+            placed.occupancy = Math.max(0,(placed.occupancy||0)-1);
+            c.boughtSomething = true;
+            markHappy(c);
+          } else if(placed.type==='deco'){
+            const d = DECORATIONS[placed.decoId];
+            if(d.income && c.money>0){
+              const pay = Math.min(c.money, d.income);
+              c.money -= pay;
+              state.money += pay; state.dayCash += pay; state.lifetimeEarned += pay;
+              c.boughtSomething = true;
+            }
+            placed.occupancy = Math.max(0,(placed.occupancy||0)-1);
+            markHappy(c);
+          }
         }
         c.state = 'walking';
       }
@@ -749,8 +896,18 @@ function simTick(dtSec){
   customers = customers.filter(c=> c.x < streetWidthPx);
 }
 
+function startQueue(c, slotIdx){
+  const queueCount = customers.filter(o=> o.state==='queuing' && o.queueSlot===slotIdx).length;
+  if(queueCount >= 4){ c.visited.add(slotIdx); return; } // queue full, give up immediately without waiting
+  c.state = 'queuing';
+  c.queueSlot = slotIdx;
+  c.patience = QUEUE_PATIENCE;
+  c.x = slotIdx*STEP + 14 - 6 - queueCount*17;
+}
+
 function renderActors(){
   const wrap = document.getElementById('sidewalkActors');
+  const cs = currentCityState();
   const existing = {};
   wrap.querySelectorAll('.customer').forEach(el=>{ existing[el.dataset.id]=el; });
   const seen = new Set();
@@ -761,28 +918,82 @@ function renderActors(){
       el = document.createElement('div');
       el.className='customer';
       el.dataset.id = c.id;
-      el.innerHTML = `<img src="assets/customers/customer-${c.variant+1}.png"><span class="bag-badge" style="display:none;">🛍️</span>`;
+      el.innerHTML = `<img src="assets/customers/customer-${c.variant+1}.png"><span class="bag-badge" style="display:none;">🛍️</span><span class="mood-badge" style="display:none;">😊</span><div class="patience-bar" style="display:none;"><div class="patience-fill"></div></div>`;
       wrap.appendChild(el);
     }
     el.style.left = c.x+'px';
+    el.classList.toggle('dancing', c.dancing);
+    let isInsideShop = false, isSeated = false;
+    if(c.state==='busy'){
+      const placedHere = cs.slots[c.slotIndex];
+      if(placedHere){
+        if(placedHere.type==='shop') isInsideShop = true;
+        else if(placedHere.type==='deco') isSeated = true;
+      }
+    }
+    el.classList.toggle('entered-shop', isInsideShop);
+    el.classList.toggle('seated', isSeated);
     const bag = el.querySelector('.bag-badge');
     if(bag) bag.style.display = c.boughtSomething ? 'block' : 'none';
+    const mood = el.querySelector('.mood-badge');
+    if(mood) mood.style.display = c.dancing ? 'block' : 'none';
+    const pbar = el.querySelector('.patience-bar');
+    if(pbar){
+      if(c.state==='queuing'){
+        pbar.style.display = 'block';
+        const frac = Math.max(0, c.patience/QUEUE_PATIENCE);
+        const fill = pbar.querySelector('.patience-fill');
+        fill.style.width = (frac*100)+'%';
+        fill.style.background = frac>0.5 ? '#2E9E5B' : frac>0.25 ? '#F5C518' : '#D64545';
+      } else {
+        pbar.style.display = 'none';
+      }
+    }
   });
   Object.keys(existing).forEach(id=>{ if(!seen.has(id)) existing[id].remove(); });
+
+  // buses
+  const busEls = {};
+  wrap.parentElement.querySelectorAll('.bus-sprite').forEach(el=>{ busEls[el.dataset.id]=el; });
+  const seenBus = new Set();
+  buses.forEach(b=>{
+    seenBus.add(String(b.id));
+    let el = busEls[b.id];
+    if(!el){
+      el = document.createElement('div');
+      el.className='bus-sprite';
+      el.dataset.id = b.id;
+      el.innerHTML = `<img src="assets/vehicles/bus.png" style="width:100%;">`;
+      wrap.parentElement.appendChild(el);
+    }
+    el.style.left = b.x+'px';
+  });
+  Object.keys(busEls).forEach(id=>{ if(!seenBus.has(id)) busEls[id].remove(); });
 }
 
 /* ============================= DAY CYCLE ============================= */
 function endDay(){
   const metGoal = state.dayCash >= state.dayGoal;
-  const repGain = Math.round(state.dayCash/6) + (metGoal?60:0);
+  const allHappy = state.dayCustomersTotal>0 && state.dayCustomersHappy===state.dayCustomersTotal;
+  let repGain = Math.round(state.dayCash/6) + (metGoal?60:0);
+  let bonusLine = '';
+  if(allHappy){
+    const bonus = 300 + state.day*15;
+    state.money += bonus; state.lifetimeEarned += bonus;
+    repGain += 40;
+    state.happyDays += 1;
+    bonusLine = `<p class="stat-line">😊 100% Happy Bazaar Bonus! +₹${fmt(bonus)}</p>`;
+  }
   state.reputation += repGain;
-  if(metGoal){ state.perfectDays += 1; state.perfectStreak += 1; }
-  else { state.perfectStreak = 0; }
+  if(metGoal){ state.perfectDays += 1; state.perfectStreak += 1; } else { state.perfectStreak = 0; }
 
+  const happyPct = state.dayCustomersTotal>0 ? Math.round(state.dayCustomersHappy/state.dayCustomersTotal*100) : 0;
   showModal(`<h3>📅 Day ${state.day} Complete</h3>
     <p class="stat-line">Earned today: ₹${fmt(state.dayCash)} / Goal ₹${fmt(state.dayGoal)}</p>
-    <p class="stat-line">${metGoal? '🌟 Perfect day! +'+repGain+' reputation':'Reputation +'+repGain}</p>
-    <button class="modal-btn" onclick="beginNextDay();closeModal();">Start Day ${state.day+1} ▶</button>`);
+    <p class="stat-line">😊 Customer happiness: ${happyPct}% (${state.dayCustomersHappy}/${state.dayCustomersTotal})</p>
+    ${bonusLine}
+    <p class="stat-line">${metGoal? '🌟 Perfect day! ':''}Reputation +${repGain}</p>
+    <button class="modal-btn" style="justify-content:center;" onclick="beginNextDay();closeModal();">Start Day ${state.day+1} ▶</button>`);
 
   if(state.activeFestival && state.day >= state.activeFestival.endsDay){
     const fest = FESTIVALS.find(f=>f.id===state.activeFestival.id);
@@ -796,9 +1007,11 @@ function endDay(){
 function beginNextDay(){
   state.day += 1;
   state.dayCash = 0;
+  state.dayCustomersTotal = 0;
+  state.dayCustomersHappy = 0;
   state.dayGoal = computeGoal(state.day, cityIndex(state.currentCity));
   dayTimer = DAY_DURATION_S;
-  customers = [];
+  customers = []; buses = [];
   document.getElementById('sidewalkActors').innerHTML='';
   saveState();
   render();
@@ -808,8 +1021,46 @@ document.getElementById('nextDayBtn').onclick = ()=>{ endDay(); };
 document.getElementById('pauseBtn').onclick = ()=>{
   paused = !paused;
   document.getElementById('pauseBtn').textContent = paused? '▶ Resume':'⏸ Pause';
+  document.getElementById('streetScene').classList.toggle('game-paused', paused);
+  const overlay = document.getElementById('pausedOverlay');
+  if(paused){
+    if(!overlay){
+      const el = document.createElement('div');
+      el.className = 'paused-overlay';
+      el.id = 'pausedOverlay';
+      el.textContent = '⏸ PAUSED';
+      document.getElementById('streetScene').appendChild(el);
+    }
+  } else {
+    if(overlay) overlay.remove();
+  }
 };
 document.getElementById('mapBtn').onclick = openWorldMap;
+
+let speedMult = 1;
+document.getElementById('fastBtn').onclick = ()=>{
+  speedMult = speedMult===1 ? 2 : speedMult===2 ? 3 : 1;
+  document.getElementById('fastBtn').textContent = speedMult===1 ? '⏩ Normal' : speedMult===2 ? '⏩ 2x Speed' : '⏩ 3x Speed';
+};
+
+document.getElementById('fsBtn').onclick = ()=>{
+  document.body.classList.toggle('pseudo-fullscreen');
+  const isFs = document.body.classList.contains('pseudo-fullscreen');
+  document.getElementById('fsBtn').textContent = isFs ? '⛶ Exit Fullscreen' : '⛶ Fullscreen';
+  try{
+    if(isFs && !document.fullscreenElement){
+      document.documentElement.requestFullscreen?.().catch(()=>{});
+    } else if(!isFs && document.fullscreenElement){
+      document.exitFullscreen?.().catch(()=>{});
+    }
+  }catch(e){}
+};
+document.addEventListener('fullscreenchange', ()=>{
+  if(!document.fullscreenElement){
+    document.body.classList.remove('pseudo-fullscreen');
+    document.getElementById('fsBtn').textContent = '⛶ Fullscreen';
+  }
+});
 
 /* ============================= MODAL ============================= */
 function showModal(innerHtml, wide){
@@ -825,19 +1076,21 @@ document.getElementById('noteBtn').onclick = ()=>{
   I built this whole bazaar just for you — every chai stall, every diya, every little jingle of coins.
   Grow it, decorate it, take it through every festival. Hope it makes you smile as much as you make me smile. 🌸
   </p>
-  <button class="modal-btn" onclick="closeModal()">🥰</button>`);
+  <button class="modal-btn" style="justify-content:center;" onclick="closeModal()">🥰</button>`);
 };
 
 /* ============================= MAIN LOOP ============================= */
 render();
 setInterval(()=>{
   if(paused) return;
-  simTick(TICK_MS/1000);
-  dayTimer -= TICK_MS/1000;
+  const dt = (TICK_MS/1000) * speedMult;
+  simTick(dt);
+  dayTimer -= dt;
   if(dayTimer<=0){ dayTimer = 0; endDay(); }
   document.getElementById('moneyStat').textContent = fmt(state.money);
   document.getElementById('timerStat').textContent = Math.ceil(dayTimer);
   document.getElementById('goalFill').style.width = Math.min(100, state.dayCash/state.dayGoal*100)+'%';
+  document.getElementById('happyStat').textContent = state.dayCustomersTotal>0 ? Math.round(state.dayCustomersHappy/state.dayCustomersTotal*100)+'%' : '—';
   renderActors();
   renderShopsRow();
 }, TICK_MS);
