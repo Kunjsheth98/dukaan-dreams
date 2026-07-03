@@ -1,6 +1,6 @@
 # Dukaan Dreams 🪔 — Khushi's Bazaar Empire
 
-A single-file browser tycoon game: build and grow an India-themed shopping street across 6 cities (Mumbai, Delhi, Jaipur, Kolkata, Kochi, Goa), serve customers for coins, upgrade shops through 3 tiers, decorate with rangoli/diyas/lamps, and run festival events (Diwali, Holi, Wedding Season) for income multipliers.
+A single-file browser tycoon game, built to work like the real *Shopping Street* classic: customers walk in from the left with a real wallet of money, cross the street, and automatically enter any shop that isn't full — no clicking needed. Shop **placement order** is the actual strategy: cheap, fast shops early catch customers before pricier shops later drain what's left. Set across 6 India-themed bazaar levels (Mumbai, Delhi, Jaipur, Kolkata, Kochi, Goa), with real capacity/dwell-time/price economics per shop, street boosters (benches, newsstands, music ads, a bus stop) that change customer flow, daily revenue goals with a "Perfect Day" bonus, and festival events (Diwali, Holi, Wedding Season) that multiply prices on specific shops.
 
 ## How to play locally (VS Code)
 1. Open this folder in VS Code.
