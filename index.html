@@ -70,16 +70,25 @@
   .street-inner{position:relative;height:100%;min-width:100%;}
 
   .shops-row{position:absolute; bottom:24%; left:0; height:190px; display:flex; gap:14px;padding-left:14px; align-items:flex-end; z-index:3;}
+  .decos-row{position:absolute; bottom:24%; left:0; height:58px; display:flex; gap:14px;padding-left:14px; align-items:flex-end; z-index:5;}
+  .deco-slot{width:160px;height:58px;flex:0 0 auto;cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center;}
+  .deco-slot img{max-width:64px;max-height:100%;object-fit:contain;filter:drop-shadow(0 3px 3px rgba(0,0,0,0.3));}
+  .deco-slot-empty{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.9);border:2px dashed #E7C79A;display:flex;align-items:center;justify-content:center;font-weight:900;color:#D9A868;font-size:16px;box-shadow:0 2px 4px rgba(0,0,0,.1);}
+  .deco-badge{position:absolute;top:-6px;right:2px;background:#fff;border:2px solid var(--teal);border-radius:999px;padding:0 5px;font-size:9px;font-weight:800;color:var(--teal);z-index:6;}
+  .deco-badge.locked{background:#3A2618;color:#fff;border-color:#3A2618;}
+  .deco-timer{position:absolute;top:-6px;right:2px;background:#fff;border:2px solid var(--saffron);border-radius:999px;padding:0 5px;font-size:9px;font-weight:800;color:var(--saffron);z-index:6;}
   .shop-slot{width:160px;height:190px;flex:0 0 auto;cursor:pointer;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;}
   .shop-slot .shop-img{width:100%;height:140px;object-fit:contain;filter:drop-shadow(0 5px 5px rgba(0,0,0,0.28));}
   .shop-slot svg{width:100%;height:140px;filter:drop-shadow(0 4px 4px rgba(0,0,0,0.2));}
   .shop-label{background:#fff;border-radius:9px;padding:3px 8px;font-size:10.5px;font-weight:800;text-align:center;margin-top:5px;box-shadow:0 2px 6px rgba(0,0,0,.15);line-height:1.35;max-width:150px;}
   .tier-stars-label{color:var(--marigold);font-size:9.5px;display:block;}
   .cap-pill{position:absolute;top:-6px;right:6px;background:#fff;border:2px solid var(--danger);border-radius:999px;padding:1px 6px;font-size:10px;font-weight:800;color:var(--danger);box-shadow:0 2px 4px rgba(0,0,0,.15);z-index:4;}
+  .cap-pill.locked{background:#3A2618;color:#fff;border-color:#3A2618;}
+  .shop-slot.occupied .shop-img{filter:drop-shadow(0 5px 5px rgba(0,0,0,0.28)) drop-shadow(0 0 6px rgba(214,69,69,0.5));}
   .cap-pill.deco{border-color:var(--teal);color:var(--teal);}
   .bus-timer-pill{position:absolute;top:-6px;right:6px;background:#fff;border:2px solid var(--saffron);border-radius:999px;padding:1px 6px;font-size:10px;font-weight:800;color:var(--saffron);box-shadow:0 2px 4px rgba(0,0,0,.15);z-index:4;}
 
-  .sidewalk-actors{position:absolute;left:0;right:0;bottom:24%;height:190px;pointer-events:none;z-index:3;}
+  .sidewalk-actors{position:absolute;left:0;right:0;bottom:24%;height:190px;pointer-events:none;z-index:6;}
   .customer{position:absolute;bottom:2px;width:46px;height:66px;transition:left 0.1s linear, opacity 0.35s ease, transform 0.35s ease;animation:walkbob 0.5s ease-in-out infinite alternate;}
   .customer.entered-shop{opacity:0;transform:scale(0.55) translateY(10px);animation:none;}
   .customer.seated{animation:none;transform:translateY(4px);}
@@ -89,7 +98,7 @@
   .customer img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3));}
   .bag-badge, .mood-badge{position:absolute;top:-6px;right:-6px;font-size:15px;}
   .mood-badge{left:-6px;right:auto;}
-  .patience-bar{position:absolute;top:-10px;left:2px;right:2px;height:5px;background:#e8d9c4;border-radius:4px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.2);}
+  .patience-bar{position:absolute;top:-14px;left:0px;right:0px;height:7px;background:#fff;border:1.5px solid #3A2618;border-radius:5px;overflow:hidden;box-shadow:0 2px 4px rgba(0,0,0,.3);z-index:10;}
   .patience-fill{height:100%;transition:width .1s linear, background-color .3s;}
 
   .shop-slot.tier-1 .shop-img{filter:drop-shadow(0 5px 5px rgba(0,0,0,0.28)) drop-shadow(0 0 8px rgba(192,192,220,0.8));transform:scale(1.04);}
@@ -104,7 +113,7 @@
   .sparkle{position:absolute;font-size:20px;animation:sparkleFly 0.8s ease-out forwards;pointer-events:none;z-index:6;}
   @keyframes sparkleFly{ from{opacity:1;transform:translateY(0) scale(0.6);} to{opacity:0;transform:translateY(-40px) scale(1.3);} }
 
-  .bus-sprite{position:absolute;bottom:20%;width:130px;z-index:5;transition:left 1.6s linear;}
+  .bus-sprite{position:absolute;bottom:20%;width:130px;z-index:7;transition:left 1.6s linear;}
   .bus-sprite svg{width:100%;filter:drop-shadow(0 4px 4px rgba(0,0,0,.3));}
 
   .road{position:absolute;bottom:0;left:0;right:0;height:24%;z-index:2;}
@@ -212,6 +221,7 @@
       <div class="street-scroll">
         <div class="street-inner" id="streetInner">
           <div class="shops-row" id="shopsRow"></div>
+          <div class="decos-row" id="decosRow"></div>
           <div class="sidewalk-actors" id="sidewalkActors"></div>
           <div class="road" id="road"></div>
         </div>
@@ -258,7 +268,7 @@
 /* ============================= CONFIG ============================= */
 const PLAYER_NAME = "Khushi";
 const STEP = 174;
-const SPAWN_BASE_MS = 1700;
+const SPAWN_BASE_MS = 5000;
 const DAY_DURATION_S = 45;
 const TICK_MS = 100;
 const QUEUE_PATIENCE = 6.0;
@@ -303,7 +313,7 @@ const FESTIVALS = [
 ];
 
 const ACHIEVEMENTS = [
-  {id:"first_shop", label:"First Dukaan!", test:s=>Object.values(s.cities).some(c=>c.slots.some(p=>p&&p.type==='shop')) },
+  {id:"first_shop", label:"First Dukaan!", test:s=>Object.values(s.cities).some(c=>c.shopSlots.some(p=>p)) },
   {id:"first_perfect", label:"First Perfect Day (goal hit!)", test:s=>s.perfectDays>=1 },
   {id:"first_happy", label:"First 100% Happy Day!", test:s=>s.happyDays>=1 },
   {id:"rich_5000",  label:"₹5,000 earned lifetime", test:s=>s.lifetimeEarned>=5000 },
@@ -317,7 +327,7 @@ const ACHIEVEMENTS = [
 const CUSTOMER_COUNT = 7;
 
 /* ============================= STORAGE ============================= */
-const SAVE_KEY = "dukaan_dreams_save_v5";
+const SAVE_KEY = "dukaan_dreams_save_v6";
 const MemStore = {};
 function storageSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){ MemStore[k]=v; } }
 function storageGet(k){ try{ return localStorage.getItem(k); }catch(e){ return MemStore[k]||null; } }
@@ -325,15 +335,15 @@ function storageGet(k){ try{ return localStorage.getItem(k); }catch(e){ return M
 /* ============================= STATE ============================= */
 function freshState(){
   const cities = {};
-  CITIES.forEach(c=>{ cities[c.id] = { slots:new Array(c.slots).fill(null) }; });
+  CITIES.forEach(c=>{ cities[c.id] = { shopSlots:new Array(c.slots).fill(null), decoSlots:new Array(c.slots).fill(null) }; });
   return {
-    money:150, reputation:0, day:1, dayCash:0, dayGoal: computeGoal(1,0),
+    money:80, reputation:0, day:1, dayCash:0, dayGoal: computeGoal(1,0),
     dayCustomersTotal:0, dayCustomersHappy:0,
     perfectDays:0, happyDays:0, perfectStreak:0, lifetimeEarned:0, festivalsHosted:0,
     currentCity:"mumbai", activeFestival:null, festivalCooldowns:{}, unlockedAch:[], cities
   };
 }
-function computeGoal(day, cityIdx){ return Math.round(130 + (day-1)*27 + cityIdx*100); }
+function computeGoal(day, cityIdx){ return Math.round(60 + (day-1)*14 + cityIdx*70); }
 
 let state = loadState();
 function loadState(){
@@ -343,9 +353,13 @@ function loadState(){
     const parsed = JSON.parse(raw);
     const fresh = freshState();
     CITIES.forEach(c=>{
-      if(!parsed.cities[c.id]) parsed.cities[c.id] = fresh.cities[c.id];
-      if(parsed.cities[c.id].slots.length < c.slots){
-        while(parsed.cities[c.id].slots.length < c.slots) parsed.cities[c.id].slots.push(null);
+      if(!parsed.cities[c.id] || !parsed.cities[c.id].shopSlots){ parsed.cities[c.id] = fresh.cities[c.id]; return; }
+      if(parsed.cities[c.id].shopSlots.length < c.slots){
+        while(parsed.cities[c.id].shopSlots.length < c.slots) parsed.cities[c.id].shopSlots.push(null);
+      }
+      if(!parsed.cities[c.id].decoSlots) parsed.cities[c.id].decoSlots = new Array(c.slots).fill(null);
+      if(parsed.cities[c.id].decoSlots.length < c.slots){
+        while(parsed.cities[c.id].decoSlots.length < c.slots) parsed.cities[c.id].decoSlots.push(null);
       }
     });
     if(parsed.dayCustomersTotal===undefined){ parsed.dayCustomersTotal=0; parsed.dayCustomersHappy=0; parsed.happyDays=0; }
@@ -359,6 +373,7 @@ let buses = [];
 let custIdSeq = 1;
 let busIdSeq = 1;
 let paused = false;
+let dayActive = true;
 let dayTimer = DAY_DURATION_S;
 let spawnAcc = 0;
 
@@ -410,7 +425,7 @@ function emptyLotSVG(slotNum){
     <text x="42" y="73" font-size="10" font-weight="800" text-anchor="middle" fill="#D64545" transform="rotate(-3 42 69)">FOR SALE</text>
     <circle cx="60" cy="34" r="22" fill="#fff" stroke="#E7C79A" stroke-width="3"/>
     <text x="60" y="42" font-size="24" font-weight="900" text-anchor="middle" fill="#D9A868">+</text>
-    <text x="60" y="105" font-size="9" text-anchor="middle" fill="#8a6a52">Slot ${slotNum}</text>
+    <text x="60" y="105" font-size="8" text-anchor="middle" fill="#8a6a52" opacity="0.6">Slot ${slotNum}</text>
   </svg>`;
 }
 
@@ -446,6 +461,7 @@ function render(){
   document.getElementById('skylineImg').src = `assets/skylines/${state.currentCity}.jpg`;
   renderRoad();
   renderShopsRow();
+  renderDecosRow();
   renderShopList();
   renderAchievements();
 }
@@ -520,37 +536,51 @@ function renderShopsRow(){
   const cs = currentCityState();
   document.getElementById('cityName').textContent = cdef.name;
   document.getElementById('cityDesc').textContent = cdef.desc;
-  document.getElementById('streetInner').style.width = (cs.slots.length*STEP + 100)+'px';
+  document.getElementById('streetInner').style.width = (cs.shopSlots.length*STEP + 100)+'px';
 
   const row = document.getElementById('shopsRow');
   row.innerHTML = '';
-  cs.slots.forEach((placed, idx)=>{
+  cs.shopSlots.forEach((placed, idx)=>{
     const slot = document.createElement('div');
     slot.className = 'shop-slot';
-    if(placed && placed.type==='shop'){
+    if(placed){
       const type = SHOP_TYPES[placed.shopId];
       const tierInfo = type.tiers[placed.tier];
       const occ = placed.occupancy||0;
       const stars = '★'.repeat(placed.tier+1)+'☆'.repeat(type.tiers.length-1-placed.tier);
       const medals = ['🥉','🥈','🥇'];
-      slot.className = 'shop-slot tier-'+placed.tier;
-      slot.innerHTML = `<div class="cap-pill">${occ}/${tierInfo.cap}</div>
+      slot.className = 'shop-slot tier-'+placed.tier+(occ>0?' occupied':'');
+      slot.innerHTML = `<div class="cap-pill${occ>0?' locked':''}">${occ>0?'🔒 ':''}${occ}/${tierInfo.cap}</div>
         <span class="tier-badge">${medals[placed.tier]}</span>
         <img class="shop-img" src="assets/shops/${type.imgs[placed.tier]}" alt="${type.name}">
         <div class="shop-label">${type.name}<span class="tier-stars-label">${stars}</span></div>`;
       slot.onclick = ()=>openShopModal(idx);
-    } else if(placed && placed.type==='deco'){
-      const d = DECORATIONS[placed.decoId];
-      let badge = '';
-      if(d.kind==='seat') badge = `<div class="cap-pill deco">${placed.occupancy||0}/${d.cap}</div>`;
-      if(d.kind==='bus') badge = `<div class="bus-timer-pill">🚌 ${Math.ceil(placed.busTimer)}s</div>`;
-      slot.innerHTML = `${badge}
-        <img class="shop-img" src="assets/decorations/${d.img}" alt="${d.name}">
-        <div class="shop-label">${d.emoji} ${d.name}</div>`;
-      slot.onclick = ()=>openDecoInfoModal(idx);
     } else {
       slot.innerHTML = emptyLotSVG(idx+1);
-      slot.onclick = ()=>openBuildModal(idx);
+      slot.onclick = ()=>openBuildShopModal(idx);
+    }
+    row.appendChild(slot);
+  });
+}
+
+function renderDecosRow(){
+  const cs = currentCityState();
+  const row = document.getElementById('decosRow');
+  row.innerHTML = '';
+  cs.decoSlots.forEach((placed, idx)=>{
+    const slot = document.createElement('div');
+    slot.className = 'deco-slot';
+    if(placed){
+      const d = DECORATIONS[placed.decoId];
+      let badge = '';
+      const occ = placed.occupancy||0;
+      if(d.kind==='seat') badge = `<div class="deco-badge${occ>0?' locked':''}">${occ>0?'🔒 ':''}${occ}/${d.cap}</div>`;
+      if(d.kind==='bus') badge = `<div class="deco-timer">🚌 ${Math.ceil(placed.busTimer)}s</div>`;
+      slot.innerHTML = `${badge}<img src="assets/decorations/${d.img}" alt="${d.name}" title="${d.name}">`;
+      slot.onclick = ()=>openDecoInfoModal(idx);
+    } else {
+      slot.innerHTML = `<div class="deco-slot-empty">+</div>`;
+      slot.onclick = ()=>openBuildDecoModal(idx);
     }
     row.appendChild(slot);
   });
@@ -567,11 +597,11 @@ function renderShopList(){
     row.innerHTML = `<span><img class="thumb" src="assets/shops/${type.imgs[0]}"> ${type.name}${type.holding?' 🍽️':''} <br><small>₹${fmt(type.baseCost)} · cap ${type.tiers[0].cap} · ₹${type.tiers[0].price}/visit${type.holding?' · holds a big crowd!':''}</small></span>`;
     const btn = document.createElement('button');
     btn.className='buy-btn'; btn.textContent='Build';
-    const hasSlot = currentCityState().slots.includes(null);
+    const hasSlot = currentCityState().shopSlots.includes(null);
     btn.disabled = state.money < type.baseCost || !hasSlot;
     btn.onclick = ()=>{
-      const emptyIdx = currentCityState().slots.findIndex(p=>p===null);
-      if(emptyIdx===-1){ toast("No empty plots left here!"); return; }
+      const emptyIdx = currentCityState().shopSlots.findIndex(p=>p===null);
+      if(emptyIdx===-1){ toast("No empty shop plots left here!"); return; }
       buildShop(emptyIdx, shopId);
     };
     row.appendChild(btn);
@@ -587,11 +617,11 @@ function renderShopList(){
     row.innerHTML = `<span><img class="thumb" src="assets/decorations/${d.img}"> ${d.name} <br><small>₹${fmt(d.baseCost)} · ${descBit}</small></span>`;
     const btn = document.createElement('button');
     btn.className='buy-btn'; btn.textContent='Build';
-    const hasSlot = currentCityState().slots.includes(null);
+    const hasSlot = currentCityState().decoSlots.includes(null);
     btn.disabled = state.money < d.baseCost || !hasSlot;
     btn.onclick = ()=>{
-      const emptyIdx = currentCityState().slots.findIndex(p=>p===null);
-      if(emptyIdx===-1){ toast("No empty plots left here!"); return; }
+      const emptyIdx = currentCityState().decoSlots.findIndex(p=>p===null);
+      if(emptyIdx===-1){ toast("No empty furniture spots left here!"); return; }
       buildDeco(emptyIdx, id);
     };
     row.appendChild(btn);
@@ -612,7 +642,7 @@ function buildShop(idx, shopId){
   const type = SHOP_TYPES[shopId];
   if(state.money < type.baseCost) return;
   state.money -= type.baseCost;
-  currentCityState().slots[idx] = {type:'shop', shopId, tier:0, occupancy:0};
+  currentCityState().shopSlots[idx] = {shopId, tier:0, occupancy:0};
   toast(`Opened a new ${type.name}! ${type.emoji}`);
   checkAchievements();
   saveState(); render();
@@ -622,68 +652,83 @@ function buildDeco(idx, decoId){
   const d = DECORATIONS[decoId];
   if(state.money < d.baseCost) return;
   state.money -= d.baseCost;
-  const obj = {type:'deco', decoId, occupancy:0};
+  const obj = {decoId, occupancy:0};
   if(d.kind==='bus') obj.busTimer = d.busInterval;
-  currentCityState().slots[idx] = obj;
+  currentCityState().decoSlots[idx] = obj;
   toast(`Placed ${d.name}! ${d.emoji}`);
   checkAchievements();
   saveState(); render();
 }
 
-function openBuildModal(idx){
+function openBuildShopModal(idx){
   const cdef = currentCityDef();
-  let options = cdef.shops.map(shopId=>{
+  const options = cdef.shops.map(shopId=>{
     const t = SHOP_TYPES[shopId];
     const affordable = state.money >= t.baseCost;
     return `<button class="modal-btn ${affordable?'':'secondary'}" ${affordable?'':'disabled'} onclick="buildShop(${idx},'${shopId}');closeModal();">
       <img src="assets/shops/${t.imgs[0]}"> <span>${t.name} — ₹${fmt(t.baseCost)}<br><small>cap ${t.tiers[0].cap}, ₹${t.tiers[0].price}/visit</small></span>
     </button>`;
   }).join('');
-  options += `<div class="section-sub">Street Furniture</div>`;
-  options += Object.entries(DECORATIONS).map(([id,d])=>{
+  showModal(`<h3><span class="close-x" onclick="closeModal()">✕</span>Build Shop — Plot ${idx+1}</h3>
+    <p style="font-size:12.5px;color:#7a5c47;">Tip: place fast, cheap shops toward the start of the street so more customers still have money left when they reach your pricier ones later.</p>
+    ${options}`);
+}
+
+function openBuildDecoModal(idx){
+  const options = Object.entries(DECORATIONS).map(([id,d])=>{
     const affordable = state.money >= d.baseCost;
     const descBit = d.kind==='seat' ? `cap ${d.cap}, free to sit${d.income?(', +₹'+d.income+' newsstand fee'):''}` : d.kind==='bus' ? `spawns 3 customers every ${d.busInterval}s` : 'customers dance as they pass, no stop';
     return `<button class="modal-btn ${affordable?'':'secondary'}" ${affordable?'':'disabled'} onclick="buildDeco(${idx},'${id}');closeModal();">
       <img src="assets/decorations/${d.img}"> <span>${d.name} — ₹${fmt(d.baseCost)}<br><small>${descBit}</small></span>
     </button>`;
   }).join('');
-  showModal(`<h3><span class="close-x" onclick="closeModal()">✕</span>Build on Slot ${idx+1}</h3>
-    <p style="font-size:12.5px;color:#7a5c47;">Tip: cheap fast shops early, benches/newsstands to slow the crowd down before your pricier shops later.</p>
+  showModal(`<h3><span class="close-x" onclick="closeModal()">✕</span>Add Street Furniture — Plot ${idx+1}</h3>
+    <p style="font-size:12.5px;color:#7a5c47;">This sits at the base of Plot ${idx+1}'s shop — it doesn't take the shop's spot, both work together here.</p>
     ${options}`);
 }
 
 function openShopModal(idx){
-  const placed = currentCityState().slots[idx];
+  const placed = currentCityState().shopSlots[idx];
   const type = SHOP_TYPES[placed.shopId];
   const tierInfo = type.tiers[placed.tier];
   const nextTier = type.tiers[placed.tier+1];
+  const occupied = (placed.occupancy||0) > 0;
   let html = `<h3><span class="close-x" onclick="closeModal()">✕</span>${type.emoji} ${type.name}</h3>
-    <p class="stat-line">Tier ${placed.tier+1} of ${type.tiers.length} — Slot ${idx+1}</p>
-    <p class="stat-line">Capacity: ${tierInfo.cap} customers at once</p>
+    <p class="stat-line">Tier ${placed.tier+1} of ${type.tiers.length} — Plot ${idx+1}</p>
+    <p class="stat-line">Capacity: ${tierInfo.cap} customers at once (${placed.occupancy||0} inside now)</p>
     <p class="stat-line">Dwell time: ${tierInfo.dwell}s per visit</p>
     <p class="stat-line">Price: ₹${tierInfo.price} per customer</p>`;
+  if(occupied){
+    html += `<p style="font-size:12px;color:#D64545;font-weight:700;">🚫 A customer is inside right now — wait for them to leave before upgrading or selling.</p>`;
+  }
   if(nextTier){
-    html += `<button class="modal-btn" ${state.money<nextTier.upgradeCost?'disabled':''} onclick="upgradeShop(${idx});closeModal();">⬆️ Upgrade — ₹${fmt(nextTier.upgradeCost)} (cap ${nextTier.cap}, ₹${nextTier.price}/visit)</button>`;
+    const canAfford = state.money>=nextTier.upgradeCost;
+    html += `<button class="modal-btn" ${(!canAfford||occupied)?'disabled':''} onclick="upgradeShop(${idx});closeModal();">⬆️ Upgrade — ₹${fmt(nextTier.upgradeCost)} (cap ${nextTier.cap}, ₹${nextTier.price}/visit)</button>`;
   } else {
     html += `<p style="font-size:12px;color:#7a5c47;">🌟 Maxed out! This shop is at its best.</p>`;
   }
-  html += `<button class="modal-btn secondary" onclick="sellSlot(${idx});closeModal();">Sell shop (refund 50%)</button>`;
+  html += `<button class="modal-btn secondary" ${occupied?'disabled':''} onclick="sellShopSlot(${idx});closeModal();">Sell shop (refund 50%)</button>`;
   showModal(html);
 }
 
 function openDecoInfoModal(idx){
-  const placed = currentCityState().slots[idx];
+  const placed = currentCityState().decoSlots[idx];
   const d = DECORATIONS[placed.decoId];
+  const occupied = (placed.occupancy||0) > 0;
   let html = `<h3><span class="close-x" onclick="closeModal()">✕</span>${d.emoji} ${d.name}</h3>`;
-  if(d.kind==='seat') html += `<p class="stat-line">Customers sit for ${d.dwell}s. Capacity ${d.cap}.${d.income?(' Pays ₹'+d.income+' per visit.'):' Free — pure happiness.'}</p>`;
+  if(d.kind==='seat') html += `<p class="stat-line">Customers sit for ${d.dwell}s. Capacity ${d.cap} (${placed.occupancy||0} sitting now).${d.income?(' Pays ₹'+d.income+' per visit.'):' Free — pure happiness.'}</p>`;
   if(d.kind==='pass') html += `<p class="stat-line">Every customer who walks past dances for a moment and counts toward today's happiness — no stop needed.</p>`;
   if(d.kind==='bus') html += `<p class="stat-line">A bus arrives here every ${d.busInterval}s and drops off 3 fresh customers right at this spot.</p>`;
-  html += `<button class="modal-btn secondary" onclick="sellSlot(${idx});closeModal();">Remove (refund 50%)</button>`;
+  if(occupied){
+    html += `<p style="font-size:12px;color:#D64545;font-weight:700;">🚫 Someone's using it right now — wait for them to leave before removing it.</p>`;
+  }
+  html += `<button class="modal-btn secondary" ${occupied?'disabled':''} onclick="sellDecoSlot(${idx});closeModal();">Remove (refund 50%)</button>`;
   showModal(html);
 }
 
 function upgradeShop(idx){
-  const placed = currentCityState().slots[idx];
+  const placed = currentCityState().shopSlots[idx];
+  if((placed.occupancy||0) > 0){ toast("Can't upgrade while a customer is inside!"); return; }
   const type = SHOP_TYPES[placed.shopId];
   const nextTier = type.tiers[placed.tier+1];
   if(!nextTier || state.money < nextTier.upgradeCost) return;
@@ -714,22 +759,26 @@ function playUpgradeFX(idx){
   }
 }
 
-function sellSlot(idx){
-  const placed = currentCityState().slots[idx];
-  let refund, name;
-  if(placed.type==='shop'){
-    const type = SHOP_TYPES[placed.shopId];
-    refund = type.baseCost*0.5;
-    for(let i=1;i<=placed.tier;i++) refund += type.tiers[i].upgradeCost*0.5;
-    name = type.name;
-  } else {
-    const d = DECORATIONS[placed.decoId];
-    refund = d.baseCost*0.5;
-    name = d.name;
-  }
+function sellShopSlot(idx){
+  const placed = currentCityState().shopSlots[idx];
+  if((placed.occupancy||0) > 0){ toast("Can't remove this while a customer is inside!"); return; }
+  const type = SHOP_TYPES[placed.shopId];
+  let refund = type.baseCost*0.5;
+  for(let i=1;i<=placed.tier;i++) refund += type.tiers[i].upgradeCost*0.5;
   state.money += refund;
-  currentCityState().slots[idx] = null;
-  toast(`Sold ${name} for ₹${fmt(refund)}`);
+  currentCityState().shopSlots[idx] = null;
+  toast(`Sold ${type.name} for ₹${fmt(refund)}`);
+  saveState(); render();
+}
+
+function sellDecoSlot(idx){
+  const placed = currentCityState().decoSlots[idx];
+  if((placed.occupancy||0) > 0){ toast("Can't remove this while someone's using it!"); return; }
+  const d = DECORATIONS[placed.decoId];
+  const refund = d.baseCost*0.5;
+  state.money += refund;
+  currentCityState().decoSlots[idx] = null;
+  toast(`Sold ${d.name} for ₹${fmt(refund)}`);
   saveState(); render();
 }
 
@@ -776,11 +825,11 @@ function simTick(dtSec){
     if(Math.random() < 0.85) spawnCustomer();
   }
 
-  const streetWidthPx = cs.slots.length*STEP + 80;
+  const streetWidthPx = cs.shopSlots.length*STEP + 80;
 
   // bus stop timers
-  cs.slots.forEach((placed, idx)=>{
-    if(placed && placed.type==='deco' && placed.decoId==='busstop'){
+  cs.decoSlots.forEach((placed, idx)=>{
+    if(placed && placed.decoId==='busstop'){
       placed.busTimer -= dtSec;
       if(placed.busTimer<=0){
         placed.busTimer = DECORATIONS.busstop.busInterval;
@@ -814,48 +863,48 @@ function simTick(dtSec){
     if(c.state==='walking'){
       c.x += speed*dtSec;
       const slotIdx = Math.floor((c.x-14)/STEP);
-      if(slotIdx>=0 && slotIdx<cs.slots.length){
-        const placed = cs.slots[slotIdx];
-        if(placed && !c.visited.has(slotIdx)){
-          if(placed.type==='shop' && c.money>0){
-            const type = SHOP_TYPES[placed.shopId];
-            const tierInfo = type.tiers[placed.tier];
-            if((placed.occupancy||0) < tierInfo.cap){
-              placed.occupancy = (placed.occupancy||0)+1;
-              c.state = 'busy'; c.slotIndex = slotIdx;
-              c.dwellRemaining = tierInfo.dwell; c.visited.add(slotIdx);
+      if(slotIdx>=0 && slotIdx<cs.shopSlots.length){
+        const decoHere = cs.decoSlots[slotIdx];
+        const shopHere = cs.shopSlots[slotIdx];
+        // decorations are visited first (furniture sits in front of the shop)
+        if(decoHere && !c.visited.has(slotIdx+'-deco')){
+          const d = DECORATIONS[decoHere.decoId];
+          if(d.kind==='seat'){
+            if((decoHere.occupancy||0) < d.cap){
+              decoHere.occupancy = (decoHere.occupancy||0)+1;
+              c.state = 'busy'; c.slotIndex = slotIdx; c.busyKind = 'deco';
+              c.dwellRemaining = d.dwell; c.visited.add(slotIdx+'-deco');
             } else {
-              startQueue(c, slotIdx);
+              startQueue(c, slotIdx, 'deco');
             }
-          } else if(placed.type==='deco'){
-            const d = DECORATIONS[placed.decoId];
-            if(d.kind==='seat'){
-              if((placed.occupancy||0) < d.cap){
-                placed.occupancy = (placed.occupancy||0)+1;
-                c.state = 'busy'; c.slotIndex = slotIdx;
-                c.dwellRemaining = d.dwell; c.visited.add(slotIdx);
-              } else {
-                startQueue(c, slotIdx);
-              }
-            } else if(d.kind==='pass'){
-              c.visited.add(slotIdx);
-              c.dancing = true;
-              markHappy(c);
-            }
+          } else if(d.kind==='pass'){
+            c.visited.add(slotIdx+'-deco');
+            c.dancing = true;
+            markHappy(c);
+          }
+        } else if(shopHere && !c.visited.has(slotIdx+'-shop') && c.money>0){
+          const type = SHOP_TYPES[shopHere.shopId];
+          const tierInfo = type.tiers[shopHere.tier];
+          if((shopHere.occupancy||0) < tierInfo.cap){
+            shopHere.occupancy = (shopHere.occupancy||0)+1;
+            c.state = 'busy'; c.slotIndex = slotIdx; c.busyKind = 'shop';
+            c.dwellRemaining = tierInfo.dwell; c.visited.add(slotIdx+'-shop');
+          } else {
+            startQueue(c, slotIdx, 'shop');
           }
         }
       }
     } else if(c.state==='queuing'){
-      const placed = cs.slots[c.queueSlot];
-      const capInfo = placed.type==='shop' ? SHOP_TYPES[placed.shopId].tiers[placed.tier] : DECORATIONS[placed.decoId];
+      const placed = c.queueKind==='shop' ? cs.shopSlots[c.queueSlot] : cs.decoSlots[c.queueSlot];
+      const capInfo = c.queueKind==='shop' ? SHOP_TYPES[placed.shopId].tiers[placed.tier] : DECORATIONS[placed.decoId];
       if(placed && (placed.occupancy||0) < capInfo.cap){
         placed.occupancy = (placed.occupancy||0)+1;
-        c.state = 'busy'; c.slotIndex = c.queueSlot;
-        c.dwellRemaining = capInfo.dwell; c.visited.add(c.queueSlot);
+        c.state = 'busy'; c.slotIndex = c.queueSlot; c.busyKind = c.queueKind;
+        c.dwellRemaining = capInfo.dwell; c.visited.add(c.queueSlot+'-'+c.queueKind);
       } else {
         c.patience -= dtSec;
         if(c.patience <= 0){
-          c.visited.add(c.queueSlot);
+          c.visited.add(c.queueSlot+'-'+c.queueKind);
           c.state = 'walking';
           c.x = (c.queueSlot+1)*STEP + 14;
         }
@@ -863,9 +912,9 @@ function simTick(dtSec){
     } else if(c.state==='busy'){
       c.dwellRemaining -= dtSec;
       if(c.dwellRemaining<=0){
-        const placed = cs.slots[c.slotIndex];
-        if(placed){
-          if(placed.type==='shop'){
+        if(c.busyKind==='shop'){
+          const placed = cs.shopSlots[c.slotIndex];
+          if(placed){
             const type = SHOP_TYPES[placed.shopId];
             const tierInfo = type.tiers[placed.tier];
             const fest = isFestivalActiveFor(placed.shopId);
@@ -876,7 +925,10 @@ function simTick(dtSec){
             placed.occupancy = Math.max(0,(placed.occupancy||0)-1);
             c.boughtSomething = true;
             markHappy(c);
-          } else if(placed.type==='deco'){
+          }
+        } else if(c.busyKind==='deco'){
+          const placed = cs.decoSlots[c.slotIndex];
+          if(placed){
             const d = DECORATIONS[placed.decoId];
             if(d.income && c.money>0){
               const pay = Math.min(c.money, d.income);
@@ -896,11 +948,12 @@ function simTick(dtSec){
   customers = customers.filter(c=> c.x < streetWidthPx);
 }
 
-function startQueue(c, slotIdx){
-  const queueCount = customers.filter(o=> o.state==='queuing' && o.queueSlot===slotIdx).length;
-  if(queueCount >= 4){ c.visited.add(slotIdx); return; } // queue full, give up immediately without waiting
+function startQueue(c, slotIdx, kind){
+  const queueCount = customers.filter(o=> o.state==='queuing' && o.queueSlot===slotIdx && o.queueKind===kind).length;
+  if(queueCount >= 4){ c.visited.add(slotIdx+'-'+kind); return; } // queue full, give up immediately without waiting
   c.state = 'queuing';
   c.queueSlot = slotIdx;
+  c.queueKind = kind;
   c.patience = QUEUE_PATIENCE;
   c.x = slotIdx*STEP + 14 - 6 - queueCount*17;
 }
@@ -925,11 +978,8 @@ function renderActors(){
     el.classList.toggle('dancing', c.dancing);
     let isInsideShop = false, isSeated = false;
     if(c.state==='busy'){
-      const placedHere = cs.slots[c.slotIndex];
-      if(placedHere){
-        if(placedHere.type==='shop') isInsideShop = true;
-        else if(placedHere.type==='deco') isSeated = true;
-      }
+      if(c.busyKind==='shop') isInsideShop = true;
+      else if(c.busyKind==='deco') isSeated = true;
     }
     el.classList.toggle('entered-shop', isInsideShop);
     el.classList.toggle('seated', isSeated);
@@ -973,6 +1023,7 @@ function renderActors(){
 
 /* ============================= DAY CYCLE ============================= */
 function endDay(){
+  dayActive = false;
   const metGoal = state.dayCash >= state.dayGoal;
   const allHappy = state.dayCustomersTotal>0 && state.dayCustomersHappy===state.dayCustomersTotal;
   let repGain = Math.round(state.dayCash/6) + (metGoal?60:0);
@@ -1005,6 +1056,7 @@ function endDay(){
 }
 
 function beginNextDay(){
+  dayActive = true;
   state.day += 1;
   state.dayCash = 0;
   state.dayCustomersTotal = 0;
@@ -1082,17 +1134,18 @@ document.getElementById('noteBtn').onclick = ()=>{
 /* ============================= MAIN LOOP ============================= */
 render();
 setInterval(()=>{
-  if(paused) return;
+  if(paused || !dayActive) return;
   const dt = (TICK_MS/1000) * speedMult;
   simTick(dt);
   dayTimer -= dt;
-  if(dayTimer<=0){ dayTimer = 0; endDay(); }
+  if(dayTimer<=0){ dayTimer = 0; endDay(); return; }
   document.getElementById('moneyStat').textContent = fmt(state.money);
   document.getElementById('timerStat').textContent = Math.ceil(dayTimer);
   document.getElementById('goalFill').style.width = Math.min(100, state.dayCash/state.dayGoal*100)+'%';
   document.getElementById('happyStat').textContent = state.dayCustomersTotal>0 ? Math.round(state.dayCustomersHappy/state.dayCustomersTotal*100)+'%' : '—';
   renderActors();
   renderShopsRow();
+  renderDecosRow();
 }, TICK_MS);
 setInterval(saveState, 5000);
 </script>
